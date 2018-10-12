@@ -3,9 +3,9 @@ import 'package:photofilters/filters/filters.dart';
 // Clarendon: adds light to lighter areas and dark to darker areas
 class ClarendonFilter extends Filter {
   ClarendonFilter() : super(name: "Clarendon") {
-    subFilters.add(new BrightnessSubFilter(10));
-    subFilters.add(new ContrastSubFilter(10));
-    subFilters.add(new SaturationSubFilter(15));
+    subFilters.add(new BrightnessSubFilter(.1));
+    subFilters.add(new ContrastSubFilter(.1));
+    subFilters.add(new SaturationSubFilter(.15));
   }
 }
 

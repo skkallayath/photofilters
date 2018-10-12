@@ -1,17 +1,19 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+int clampPixel(int x) => x.clamp(0, 255);
 void saturation(Uint8List bytes, num saturation) {
   saturation = (saturation < -1) ? -1 : saturation;
   for (int i = 0; i < bytes.length; i += 4) {
     num r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
     num gray =
         0.2989 * r + 0.5870 * g + 0.1140 * b; //weights from CCIR 601 spec
-    bytes[i] = (-gray * saturation + bytes[i] * (1 + saturation)).round();
-    bytes[i + 1] =
-        (-gray * saturation + bytes[i + 1] * (1 + saturation)).round();
-    bytes[i + 2] =
-        (-gray * saturation + bytes[i + 2] * (1 + saturation)).round();
+    bytes[i] =
+        clampPixel((-gray * saturation + bytes[i] * (1 + saturation)).round());
+    bytes[i + 1] = clampPixel(
+        (-gray * saturation + bytes[i + 1] * (1 + saturation)).round());
+    bytes[i + 2] = clampPixel(
+        (-gray * saturation + bytes[i + 2] * (1 + saturation)).round());
   }
 }
 
@@ -21,25 +23,25 @@ void hueRotation(Uint8List bytes, int degrees) {
 
   for (int i = 0; i < bytes.length; i += 4) {
     num r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
-    bytes[i] = ((.299 + .701 * U + .168 * W) * r +
+    bytes[i] = clampPixel(((.299 + .701 * U + .168 * W) * r +
             (.587 - .587 * U + .330 * W) * g +
             (.114 - .114 * U - .497 * W) * b)
-        .round();
-    bytes[i + 1] = ((.299 - .299 * U - .328 * W) * r +
+        .round());
+    bytes[i + 1] = clampPixel(((.299 - .299 * U - .328 * W) * r +
             (.587 + .413 * U + .035 * W) * g +
             (.114 - .114 * U + .292 * W) * b)
-        .round();
-    bytes[i + 2] = ((.299 - .3 * U + 1.25 * W) * r +
+        .round());
+    bytes[i + 2] = clampPixel(((.299 - .3 * U + 1.25 * W) * r +
             (.587 - .588 * U - 1.05 * W) * g +
             (.114 + .886 * U - .203 * W) * b)
-        .round();
+        .round());
   }
 }
 
 void grayscale(Uint8List bytes) {
   for (int i = 0; i < bytes.length; i += 4) {
     int r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
-    int avg = (0.2126 * r + 0.7152 * g + 0.0722 * b).round();
+    int avg = clampPixel((0.2126 * r + 0.7152 * g + 0.0722 * b).round());
     bytes[i] = avg;
     bytes[i + 1] = avg;
     bytes[i + 2] = avg;
@@ -50,22 +52,23 @@ void grayscale(Uint8List bytes) {
 void sepia(Uint8List bytes, num adj) {
   for (int i = 0; i < bytes.length; i += 4) {
     int r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
-    bytes[i] = ((r * (1 - (0.607 * adj))) + (g * .769 * adj) + (b * .189 * adj))
-        .round();
-    bytes[i + 1] =
+    bytes[i] = clampPixel(
+        ((r * (1 - (0.607 * adj))) + (g * .769 * adj) + (b * .189 * adj))
+            .round());
+    bytes[i + 1] = clampPixel(
         ((r * .349 * adj) + (g * (1 - (0.314 * adj))) + (b * .168 * adj))
-            .round();
-    bytes[i + 2] =
+            .round());
+    bytes[i + 2] = clampPixel(
         ((r * .272 * adj) + (g * .534 * adj) + (b * (1 - (0.869 * adj))))
-            .round();
+            .round());
   }
 }
 
 void invert(Uint8List bytes) {
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] = 255 - bytes[i];
-    bytes[i + 1] = 255 - bytes[i + 1];
-    bytes[i + 2] = 255 - bytes[i + 2];
+    bytes[i] = clampPixel(255 - bytes[i]);
+    bytes[i + 1] = clampPixel(255 - bytes[i + 1]);
+    bytes[i + 2] = clampPixel(255 - bytes[i + 2]);
   }
 }
 
@@ -75,9 +78,9 @@ void brightness(Uint8List bytes, num adj) {
   adj = (adj < -1) ? -1 : adj;
   adj = ~~(255 * adj).round();
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] += adj;
-    bytes[i + 1] += adj;
-    bytes[i + 2] += adj;
+    bytes[i] = clampPixel(bytes[i] + adj);
+    bytes[i + 1] = clampPixel(bytes[i + 1] + adj);
+    bytes[i + 2] = clampPixel(bytes[i + 2] + adj);
   }
 }
 
@@ -87,9 +90,9 @@ void hueSaturation(Uint8List bytes, num adj) {
     var hsv = rgbToHsv(bytes[i], bytes[i + 1], bytes[i + 2]);
     hsv[1] *= adj;
     var rgb = hsvToRgb(hsv[0], hsv[1], hsv[2]);
-    bytes[i] = rgb[0];
-    bytes[i + 1] = rgb[1];
-    bytes[i + 2] = rgb[2];
+    bytes[i] = clampPixel(rgb[0]);
+    bytes[i + 1] = clampPixel(rgb[1]);
+    bytes[i + 2] = clampPixel(rgb[2]);
   }
 }
 
@@ -98,27 +101,27 @@ void contrast(Uint8List bytes, num adj) {
   adj *= 255;
   double factor = (259 * (adj + 255)) / (255 * (259 - adj));
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] = (factor * (bytes[i] - 128) + 128).round();
-    bytes[i + 1] = (factor * (bytes[i + 1] - 128) + 128).round();
-    bytes[i + 2] = (factor * (bytes[i + 2] - 128) + 128).round();
+    bytes[i] = clampPixel((factor * (bytes[i] - 128) + 128).round());
+    bytes[i + 1] = clampPixel((factor * (bytes[i + 1] - 128) + 128).round());
+    bytes[i + 2] = clampPixel((factor * (bytes[i + 2] - 128) + 128).round());
   }
 }
 
 // ColorFilter - add a slight color overlay. rgbColor is an array of [r, g, b, adj]
 void colorFilter(Uint8List bytes, num red, num green, num blue, num adj) {
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] -= (bytes[i] - red) * adj;
-    bytes[i + 1] -= (bytes[i + 1] - green) * adj;
-    bytes[i + 2] -= (bytes[i + 2] - blue) * adj;
+    bytes[i] = clampPixel(bytes[i] - (bytes[i] - red) * adj);
+    bytes[i + 1] = clampPixel(bytes[i + 1] - (bytes[i + 1] - green) * adj);
+    bytes[i + 2] = clampPixel(bytes[i + 2] - (bytes[i + 2] - blue) * adj);
   }
 }
 
 // RGB Adjust
 void rgbAdjust(Uint8List bytes, num red, num green, num blue) {
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] *= red;
-    bytes[i + 1] *= green;
-    bytes[i + 2] *= blue;
+    bytes[i] = clampPixel(bytes[i] * red);
+    bytes[i + 1] = clampPixel(bytes[i + 1] * green);
+    bytes[i + 2] = clampPixel(bytes[i + 2] * blue);
   }
 }
 
@@ -151,9 +154,9 @@ void convolute(Uint8List bytes, int width, int height, List<num> weights) {
           }
         }
       }
-      bytes[dstOff] = r;
-      bytes[dstOff + 1] = g;
-      bytes[dstOff + 2] = b;
+      bytes[dstOff] = clampPixel(r);
+      bytes[dstOff + 1] = clampPixel(g);
+      bytes[dstOff + 2] = clampPixel(b);
     }
   }
 }

@@ -6,12 +6,13 @@ import 'package:test/test.dart';
 import 'package:photofilters/photofilters.dart';
 
 void main() {
-  test("test BrightnessSubFilter", () {
+  test("test ClarendonFilter", () {
     Image image = decodeImage(File('test/res/a.png').readAsBytesSync());
     var pixels = image.getBytes();
-    BrightnessSubFilter filter = new BrightnessSubFilter(1.10);
+    ClarendonFilter filter = new ClarendonFilter();
     filter.apply(pixels);
     Image out = Image.fromBytes(image.width, image.height, pixels);
-    new File('test/out/Brightness.jpg').writeAsBytesSync(encodeJpg(out));
+    // Image out =brightness(image, 110);
+    new File('test/out/Clarendon.jpg').writeAsBytesSync(encodeJpg(out));
   });
 }
