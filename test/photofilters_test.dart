@@ -1,13 +1,17 @@
+import 'dart:io';
+
+import 'package:image/image.dart';
 import 'package:test/test.dart';
 
 import 'package:photofilters/photofilters.dart';
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = new Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
-    expect(() => calculator.addOne(null), throwsNoSuchMethodError);
+  test("test BrightnessSubFilter", () {
+    Image image = decodeImage(File('test/res/a.png').readAsBytesSync());
+    var pixels = image.getBytes();
+    BrightnessSubFilter filter = new BrightnessSubFilter(1.10);
+    filter.apply(pixels);
+    Image out = Image.fromBytes(image.width, image.height, pixels);
+    new File('test/out/Brightness.jpg').writeAsBytesSync(encodeJpg(out));
   });
 }

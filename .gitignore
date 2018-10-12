@@ -9,3 +9,6 @@ build/
 ios/.generated/
 ios/Flutter/Generated.xcconfig
 ios/Runner/GeneratedPluginRegistrant.*
+
+test/res/
+test/out/
