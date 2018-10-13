@@ -1,4 +1,6 @@
 library photofilters;
 
-export 'package:photofilters/filters/filters.dart';
-export 'package:photofilters/filters/preset_filters.dart';
+export './filters/filters.dart';
+export './filters/preset_filters.dart';
+
+export './widgets/photo_filter.dart';
