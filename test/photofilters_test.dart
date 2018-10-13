@@ -5,14 +5,19 @@ import 'package:test/test.dart';
 
 import 'package:photofilters/photofilters.dart';
 
+void applyFilter(Filter filter, String src, String dest) {
+  Image image = decodeImage(File(src).readAsBytesSync());
+  var pixels = image.getBytes();
+  filter.apply(pixels);
+  Image out = Image.fromBytes(image.width, image.height, pixels);
+  new File(dest).writeAsBytesSync(encodeNamedImage(out, dest));
+}
+
 void main() {
-  test("test ClarendonFilter", () {
-    Image image = decodeImage(File('test/res/a.png').readAsBytesSync());
-    var pixels = image.getBytes();
-    ClarendonFilter filter = new ClarendonFilter();
-    filter.apply(pixels);
-    Image out = Image.fromBytes(image.width, image.height, pixels);
-    // Image out =brightness(image, 110);
-    new File('test/out/Clarendon.jpg').writeAsBytesSync(encodeJpg(out));
+  test("test All", () {
+    for (var filter in presetFitersList) {
+      print('Applying ${filter.name}');
+      applyFilter(filter, 'test/res/a.png', 'test/out/${filter.name}.jpg');
+    }
   });
 }

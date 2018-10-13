@@ -107,21 +107,23 @@ void contrast(Uint8List bytes, num adj) {
   }
 }
 
-// ColorFilter - add a slight color overlay. rgbColor is an array of [r, g, b, adj]
-void colorFilter(Uint8List bytes, num red, num green, num blue, num adj) {
+// ColorOverlay - add a slight color overlay.
+void colorOverlay(Uint8List bytes, num red, num green, num blue, num scale) {
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] = clampPixel(bytes[i] - (bytes[i] - red) * adj);
-    bytes[i + 1] = clampPixel(bytes[i + 1] - (bytes[i + 1] - green) * adj);
-    bytes[i + 2] = clampPixel(bytes[i + 2] - (bytes[i + 2] - blue) * adj);
+    bytes[i] = clampPixel((bytes[i] - (bytes[i] - red) * scale).round());
+    bytes[i + 1] =
+        clampPixel((bytes[i + 1] - (bytes[i + 1] - green) * scale).round());
+    bytes[i + 2] =
+        clampPixel((bytes[i + 2] - (bytes[i + 2] - blue) * scale).round());
   }
 }
 
-// RGB Adjust
-void rgbAdjust(Uint8List bytes, num red, num green, num blue) {
+// RGB Scale
+void rgbScale(Uint8List bytes, num red, num green, num blue) {
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] = clampPixel(bytes[i] * red);
-    bytes[i + 1] = clampPixel(bytes[i + 1] * green);
-    bytes[i + 2] = clampPixel(bytes[i + 2] * blue);
+    bytes[i] = clampPixel((bytes[i] * red).round());
+    bytes[i + 1] = clampPixel((bytes[i + 1] * green).round());
+    bytes[i + 2] = clampPixel((bytes[i + 2] * blue).round());
   }
 }
 
@@ -239,4 +241,12 @@ List<num> hsvToRgb(num h, num s, num v) {
   }
 
   return [r * 255, g * 255, b * 255];
+}
+
+void addictiveColor(Uint8List bytes, int red, int green, int blue) {
+  for (int i = 0; i < bytes.length; i += 4) {
+    bytes[i] = clampPixel(bytes[i] + red);
+    bytes[i + 1] = clampPixel(bytes[i + 1] + green);
+    bytes[i + 2] = clampPixel(bytes[i + 2] + blue);
+  }
 }

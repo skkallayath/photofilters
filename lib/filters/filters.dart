@@ -130,3 +130,54 @@ class HueRotationSubFilter implements SubFilter {
   @override
   void apply(Uint8List pixels) => utils.hueRotation(pixels, degrees);
 }
+
+/**
+ * The [AddictiveColorSubFilter] class is a SubFilter class to emphasize a color using [red], [green] and [b] values.
+ */
+class AddictiveColorSubFilter implements SubFilter {
+  final int red;
+  final int green;
+  final int blue;
+  AddictiveColorSubFilter(this.red, this.green, this.blue);
+
+  /**
+   * Apply the [AddictiveColorSubFilter] to an Image.
+   */
+  @override
+  void apply(Uint8List pixels) =>
+      utils.addictiveColor(pixels, red, green, blue);
+}
+
+/**
+ * The [RGBScaleSubFilter] class is a SubFilter class to scale RGB values of every pixels in an image.
+ */
+class RGBScaleSubFilter implements SubFilter {
+  final num red;
+  final num green;
+  final num blue;
+  RGBScaleSubFilter(this.red, this.green, this.blue);
+
+  /**
+   * Apply the [RGBScaleSubFilter] to an Image.
+   */
+  @override
+  void apply(Uint8List pixels) => utils.rgbScale(pixels, red, green, blue);
+}
+
+/**
+ * The [RGBOverlaySubFilter] class is a SubFilter class to apply an overlay to an image.
+ */
+class RGBOverlaySubFilter implements SubFilter {
+  final num red;
+  final num green;
+  final num blue;
+  final num scale;
+  RGBOverlaySubFilter(this.red, this.green, this.blue, this.scale);
+
+  /**
+   * Apply the [RGBOverlaySubFilter] to an Image.
+   */
+  @override
+  void apply(Uint8List pixels) =>
+      utils.colorOverlay(pixels, red, green, blue, scale);
+}
