@@ -1,7 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:photofilters/photofilters.dart';
+import 'package:image/image.dart' as imageLib;
 import 'package:image_picker/image_picker.dart';
 
 void main() => runApp(new MaterialApp(home: MyApp()));
@@ -12,12 +12,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  File _image;
+  imageLib.Image _image;
+  String fileName;
   Filter _filter;
   List<Filter> filters = presetFitersList;
 
   Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    fileName = basename(imageFile.path);
+    var image = imageLib.decodeImage(imageFile.readAsBytesSync());
     setState(() {
       _image = image;
     });
@@ -57,7 +60,13 @@ class _MyAppState extends State<MyApp> {
             child: new Center(
               child: _image == null
                   ? new Text('No image selected.')
-                  : new PhotoFilter(imageFile: _image, filter: _filter),
+                  : new PhotoFilter(
+                      image: _image,
+                      filter: _filter,
+                      filename: fileName,
+                      loader: Center(
+                          child: Image.asset('assets/images/gifloader.gif')),
+                    ),
             ),
           ),
         ],

@@ -1,44 +1,55 @@
-import 'dart:io';
-import 'package:path/path.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:photofilters/filters/filters.dart';
 import 'package:image/image.dart' as imageLib;
 
 class PhotoFilter extends StatelessWidget {
-  final File imageFile;
+  final imageLib.Image image;
+  final String filename;
   final Filter filter;
-  final Widget loader;
   final BoxFit fit;
-
+  final Widget loader;
   PhotoFilter({
-    @required this.imageFile,
+    @required this.image,
+    @required this.filename,
     @required this.filter,
-    this.loader,
     this.fit = BoxFit.fill,
+    this.loader = const Center(child: CircularProgressIndicator()),
   });
 
-  List<int> applyFilter() {
-    String _filename = basename(imageFile.path);
+  Future<List<int>> applyFilter() async {
+    List<int> _bytes = image.getBytes();
+    if (filter != null) {
+      filter.apply(_bytes);
+    }
     imageLib.Image _image =
-        imageLib.decodeNamedImage(imageFile.readAsBytesSync(), _filename);
-    List<int> _bytes = _image.getBytes();
-    filter.apply(_bytes);
-    _image = imageLib.Image.fromBytes(_image.width, _image.height, _bytes);
-    return imageLib.encodeNamedImage(_image, _filename);
+        imageLib.Image.fromBytes(image.width, image.height, _bytes);
+    _bytes = imageLib.encodeNamedImage(_image, filename);
+
+    return _bytes;
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget _image;
-    if (filter == null) {
-      _image = Image.file(imageFile);
-    } else {
-      List<int> _bytes = applyFilter();
-      _image = Image.memory(
-        _bytes,
-        fit: fit,
-      );
-    }
-    return _image;
+    return FutureBuilder<List<int>>(
+      future: Future.delayed(Duration(milliseconds: 50), applyFilter),
+      builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return loader;
+          case ConnectionState.active:
+          case ConnectionState.waiting:
+            return loader;
+          case ConnectionState.done:
+            if (snapshot.hasError)
+              return Center(child: Text('Error: ${snapshot.error}'));
+            return Image.memory(
+              snapshot.data,
+              fit: fit,
+            );
+        }
+        return null; // unreachable
+      },
+    );
   }
 }
