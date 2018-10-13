@@ -21,6 +21,7 @@ class _MyAppState extends State<MyApp> {
     var imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     fileName = basename(imageFile.path);
     var image = imageLib.decodeImage(imageFile.readAsBytesSync());
+    image = imageLib.copyResize(image, 600);
     setState(() {
       _image = image;
     });
@@ -28,8 +29,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print("Render");
-
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Image Picker Example'),
@@ -51,7 +50,6 @@ class _MyAppState extends State<MyApp> {
               }).toList()),
             onChanged: (filter) {
               setState(() {
-                print("Changed filter");
                 _filter = filter;
               });
             },
