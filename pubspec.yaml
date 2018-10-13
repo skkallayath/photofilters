@@ -1,8 +1,8 @@
 name: photofilters
 description: A flutter package for photo filters.
 version: 0.0.1
-author: Sharafudheen KK (skkallayath@gmail.com)
-homepage:
+author: Sharafudheen KK <skkallayath@gmail.com>
+homepage: https://github.com/skkallayath/photofilters
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -11,10 +11,12 @@ dependencies:
   flutter:
     sdk: flutter
   image: ^2.0.4
+  meta: ^1.1.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  test:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

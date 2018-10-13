@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the contrast function from the image_utils library, for the Dart programming language.">
+  <title>contrast function - image_utils library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">photofilters</a></li>
+    <li><a href="utils_image_utils/utils_image_utils-library.html">image_utils</a></li>
+    <li class="self-crumb">contrast function</li>
+  </ol>
+  <div class="self-name">contrast</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>image_utils library</h5>
+    <ol>
+    
+    
+    
+      <li class="section-title"><a href="utils_image_utils/utils_image_utils-library.html#functions">Functions</a></li>
+      <li><a href="utils_image_utils/addictiveColor.html">addictiveColor</a></li>
+      <li><a href="utils_image_utils/brightness.html">brightness</a></li>
+      <li><a href="utils_image_utils/clampPixel.html">clampPixel</a></li>
+      <li><a href="utils_image_utils/colorOverlay.html">colorOverlay</a></li>
+      <li><a href="utils_image_utils/contrast.html">contrast</a></li>
+      <li><a href="utils_image_utils/convolute.html">convolute</a></li>
+      <li><a href="utils_image_utils/grayscale.html">grayscale</a></li>
+      <li><a href="utils_image_utils/hsvToRgb.html">hsvToRgb</a></li>
+      <li><a href="utils_image_utils/hueRotation.html">hueRotation</a></li>
+      <li><a href="utils_image_utils/hueSaturation.html">hueSaturation</a></li>
+      <li><a href="utils_image_utils/invert.html">invert</a></li>
+      <li><a href="utils_image_utils/rgbScale.html">rgbScale</a></li>
+      <li><a href="utils_image_utils/rgbToHsv.html">rgbToHsv</a></li>
+      <li><a href="utils_image_utils/saturation.html">saturation</a></li>
+      <li><a href="utils_image_utils/sepia.html">sepia</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>contrast function</h1>
+
+    <section class="multi-line-signature">
+        <span class="returntype">void</span>
+        <span class="name ">contrast</span>
+(<wbr><span class="parameter" id="contrast-param-bytes"><span class="type-annotation">Uint8List</span> <span class="parameter-name">bytes</span>, </span> <span class="parameter" id="contrast-param-adj"><span class="type-annotation">num</span> <span class="parameter-name">adj</span></span>)
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">void contrast(Uint8List bytes, num adj) {
+  adj *= 255;
+  double factor = (259 * (adj + 255)) &#47; (255 * (259 - adj));
+  for (int i = 0; i &lt; bytes.length; i += 4) {
+    bytes[i] = clampPixel((factor * (bytes[i] - 128) + 128).round());
+    bytes[i + 1] = clampPixel((factor * (bytes[i + 1] - 128) + 128).round());
+    bytes[i + 2] = clampPixel((factor * (bytes[i + 2] - 128) + 128).round());
+  }
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    photofilters 0.0.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>
