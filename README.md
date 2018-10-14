@@ -75,7 +75,8 @@ class _MyAppState extends State<MyApp> {
 
 ## UI Screen Shots
 
-![screenshot](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/screenshot.gif)
+<img src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/screenshot.gif" width="200">
+
 
 ## Sample Images of Filters
 
