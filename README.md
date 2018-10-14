@@ -4,91 +4,19 @@ A flutter package for applying filter to an image. A set of preset filters are a
 
 ## Sample Images of Filters
 
-![No Filter](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/No Filter.jpg)
-
-![AddictiveBlue](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/AddictiveBlue.jpg)
-
-![AddictiveRed](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/AddictiveRed.jpg)
-
-![Aden](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Aden.jpg)
-
-![Amaro](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Amaro.jpg)
-
-![Ashby](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ashby.jpg)
-
-![Brannan](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Brannan.jpg)
-
-![Brooklyn](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Brooklyn.jpg)
-
-![Charmes](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Charmes.jpg)
-
-![Clarendon](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Clarendon.jpg)
-
-![Crema](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Crema.jpg)
-
-![Dogpatch](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Dogpatch.jpg)
-
-![Earlybird](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Earlybird.jpg)
-
-![1977](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/1977.jpg)
-
-![Gingham](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Gingham.jpg)
-
-![Ginza](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ginza.jpg)
-
-![Hefe](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Hefe.jpg)
-
-![Helena](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Helena.jpg)
-
-![Hudson](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Hudson.jpg)
-
-![Inkwell](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Inkwell.jpg)
-
-![Juno](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Juno.jpg)
-
-![Kelvin](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Kelvin.jpg)
-
-![Lark](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Lark.jpg)
-
-![Lo-Fi](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Lo-Fi.jpg)
-
-![Ludwig](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ludwig.jpg)
-
-![Maven](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Maven.jpg)
-
-![Mayfair](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Mayfair.jpg)
-
-![Moon](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Moon.jpg)
-
-![Nashville](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Nashville.jpg)
-
-![Perpetua](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Perpetua.jpg)
-
-![Reyes](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Reyes.jpg)
-
-![Rise](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Rise.jpg)
-
-![Sierra](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Sierra.jpg)
-
-![Skyline](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Skyline.jpg)
-
-![Slumber](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Slumber.jpg)
-
-![Stinson](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Stinson.jpg)
-
-![Sutro](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Sutro.jpg)
-
-![Toaster](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Toaster.jpg)
-
-![Valencia](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Valencia.jpg)
-
-![Vesper](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Vesper.jpg)
-
-![Walden](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Walden.jpg)
-
-![Willow](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Willow.jpg)
-
-![X-Pro II](https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/X-Pro II.jpg)
+| | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|
+| <img width="1604" alt="No Filter" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/No Filter.jpg">  No Filter | <img width="1604" alt="AddictiveBlue" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/AddictiveBlue.jpg">  AddictiveBlue | <img width="1604" alt="AddictiveRed" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/AddictiveRed.jpg">  AddictiveRed | <img width="1604" alt="Aden" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Aden.jpg">  Aden  | 
+| <img width="1604" alt="Amaro" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Amaro.jpg">  Amaro | <img width="1604" alt="Ashby" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ashby.jpg">  Ashby | <img width="1604" alt="Brannan" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Brannan.jpg">  Brannan | <img width="1604" alt="Brooklyn" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Brooklyn.jpg">  Brooklyn  | 
+| <img width="1604" alt="Charmes" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Charmes.jpg">  Charmes | <img width="1604" alt="Clarendon" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Clarendon.jpg">  Clarendon | <img width="1604" alt="Crema" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Crema.jpg">  Crema | <img width="1604" alt="Dogpatch" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Dogpatch.jpg">  Dogpatch  | 
+| <img width="1604" alt="Earlybird" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Earlybird.jpg">  Earlybird | <img width="1604" alt="1977" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/1977.jpg">  1977 | <img width="1604" alt="Gingham" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Gingham.jpg">  Gingham | <img width="1604" alt="Ginza" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ginza.jpg">  Ginza  | 
+| <img width="1604" alt="Hefe" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Hefe.jpg">  Hefe | <img width="1604" alt="Helena" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Helena.jpg">  Helena | <img width="1604" alt="Hudson" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Hudson.jpg">  Hudson | <img width="1604" alt="Inkwell" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Inkwell.jpg">  Inkwell  | 
+| <img width="1604" alt="Juno" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Juno.jpg">  Juno | <img width="1604" alt="Kelvin" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Kelvin.jpg">  Kelvin | <img width="1604" alt="Lark" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Lark.jpg">  Lark | <img width="1604" alt="Lo-Fi" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Lo-Fi.jpg">  Lo-Fi  | 
+| <img width="1604" alt="Ludwig" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ludwig.jpg">  Ludwig | <img width="1604" alt="Maven" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Maven.jpg">  Maven | <img width="1604" alt="Mayfair" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Mayfair.jpg">  Mayfair | <img width="1604" alt="Moon" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Moon.jpg">  Moon  | 
+| <img width="1604" alt="Nashville" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Nashville.jpg">  Nashville | <img width="1604" alt="Perpetua" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Perpetua.jpg">  Perpetua | <img width="1604" alt="Reyes" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Reyes.jpg">  Reyes | <img width="1604" alt="Rise" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Rise.jpg">  Rise  | 
+| <img width="1604" alt="Sierra" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Sierra.jpg">  Sierra | <img width="1604" alt="Skyline" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Skyline.jpg">  Skyline | <img width="1604" alt="Slumber" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Slumber.jpg">  Slumber | <img width="1604" alt="Stinson" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Stinson.jpg">  Stinson  | 
+| <img width="1604" alt="Sutro" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Sutro.jpg">  Sutro | <img width="1604" alt="Toaster" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Toaster.jpg">  Toaster | <img width="1604" alt="Valencia" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Valencia.jpg">  Valencia | <img width="1604" alt="Vesper" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Vesper.jpg">  Vesper  | 
+| <img width="1604" alt="Walden" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Walden.jpg">  Walden | <img width="1604" alt="Willow" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Willow.jpg">  Willow | <img width="1604" alt="X-Pro II" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/X-Pro II.jpg">  X-Pro II  | |
 
 
 ## Getting Started
