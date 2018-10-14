@@ -31,43 +31,20 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Image Picker Example'),
+        title: new Text('Photo Filter Example'),
       ),
-      body: new Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          new DropdownButton<Filter>(
-            items: []
-              ..add(new DropdownMenuItem<Filter>(
-                value: null,
-                child: new Text("Choose filter"),
-              ))
-              ..addAll(filters.map((Filter value) {
-                return new DropdownMenuItem<Filter>(
-                  value: value,
-                  child: new Text(value.name),
-                );
-              }).toList()),
-            onChanged: (filter) {
-              setState(() {
-                _filter = filter;
-              });
-            },
-          ),
-          Expanded(
-            child: new Center(
-              child: _image == null
-                  ? new Text('No image selected.')
-                  : new PhotoFilter(
-                      image: _image,
-                      filter: _filter,
-                      filename: fileName,
-                      loader: Center(
-                          child: Image.asset('assets/images/gifloader.gif')),
-                    ),
-            ),
-          ),
-        ],
+      body: new Container(
+        child: _image == null
+            ? Center(
+                child: new Text('No image selected.'),
+              )
+            : new PhotoFilterSelector(
+                image: _image,
+                filters: presetFitersList,
+                filename: fileName,
+                loader: Center(child: CircularProgressIndicator()),
+                fit: BoxFit.cover,
+              ),
       ),
       floatingActionButton: new FloatingActionButton(
         onPressed: getImage,

@@ -1,5 +1,10 @@
 import 'package:photofilters/filters/filters.dart';
 
+// NoFilter: No filter
+class NoFilter extends Filter {
+  NoFilter() : super(name: "No Filter");
+}
+
 // Clarendon: adds light to lighter areas and dark to darker areas
 class ClarendonFilter extends Filter {
   ClarendonFilter() : super(name: "Clarendon") {
@@ -343,6 +348,7 @@ class CharmesFilter extends Filter {
 }
 
 List<Filter> presetFitersList = [
+  NoFilter(),
   AddictiveBlueFilter(),
   AddictiveRedFilter(),
   AdenFilter(),
