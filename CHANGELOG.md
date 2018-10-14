@@ -1,3 +1,6 @@
-## [0.0.1] - TODO: Add release date.
+## [0.1.0] - 14 Oct 2018
 
-* TODO: Describe initial release.
+* Added multiple filters.
+* Added Widget for image with filter
+* Added filter selector widget
+

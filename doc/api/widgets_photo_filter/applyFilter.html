@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the applyFilter function from the photo_filter library, for the Dart programming language.">
+  <title>applyFilter function - photo_filter library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">photofilters</a></li>
+    <li><a href="widgets_photo_filter/widgets_photo_filter-library.html">photo_filter</a></li>
+    <li class="self-crumb">applyFilter function</li>
+  </ol>
+  <div class="self-name">applyFilter</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>photo_filter library</h5>
+    <ol>
+      <li class="section-title"><a href="widgets_photo_filter/widgets_photo_filter-library.html#classes">Classes</a></li>
+      <li><a href="widgets_photo_filter/PhotoFilter-class.html">PhotoFilter</a></li>
+      <li><a href="widgets_photo_filter/PhotoFilterSelector-class.html">PhotoFilterSelector</a></li>
+    
+    
+    
+      <li class="section-title"><a href="widgets_photo_filter/widgets_photo_filter-library.html#functions">Functions</a></li>
+      <li><a href="widgets_photo_filter/applyFilter.html">applyFilter</a></li>
+      <li><a href="widgets_photo_filter/buildThumbnail.html">buildThumbnail</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>applyFilter function</h1>
+
+    <section class="multi-line-signature">
+        <span class="returntype">List<span class="signature">&lt;<wbr><span class="type-parameter">int</span>&gt;</span></span>
+        <span class="name ">applyFilter</span>
+(<wbr><span class="parameter" id="applyFilter-param-params"><span class="type-annotation">Map<span class="signature">&lt;<wbr><span class="type-parameter">String</span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">params</span></span>)
+    </section>
+    <section class="desc markdown">
+      <p>The global applyfilter function</p>
+    </section>
+    
+    <section class="summary source-code" id="source">
+      <h2><span>Implementation</span> </h2>
+      <pre class="language-dart"><code class="language-dart">List&lt;int&gt; applyFilter(Map&lt;String, dynamic&gt; params) {
+  Filter filter = params[&quot;filter&quot;];
+  imageLib.Image image = params[&quot;image&quot;];
+  String filename = params[&quot;filename&quot;];
+  List&lt;int&gt; _bytes = image.getBytes();
+  if (filter != null) {
+    filter.apply(_bytes);
+  }
+  imageLib.Image _image =
+      imageLib.Image.fromBytes(image.width, image.height, _bytes);
+  _bytes = imageLib.encodeNamedImage(_image, filename);
+
+  return _bytes;
+}</code></pre>
+    </section>
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    photofilters 0.0.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

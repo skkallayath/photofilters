@@ -21,7 +21,7 @@
 
 <header id="title">
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li class="self-crumb">photofilters package</li>
+    <li><a href="https://github.com/skkallayath/photofilters">photofilters package</a></li>
   </ol>
   <div class="self-name">photofilters</div>
   <form class="search navbar-right" role="search">
@@ -38,6 +38,7 @@
           <li><a href="utils_convolution_kernels/utils_convolution_kernels-library.html">convolution_kernels</a></li>
           <li><a href="filters_filters/filters_filters-library.html">filters</a></li>
           <li><a href="utils_image_utils/utils_image_utils-library.html">image_utils</a></li>
+          <li><a href="widgets_photo_filter/widgets_photo_filter-library.html">photo_filter</a></li>
           <li><a href="photofilters/photofilters-library.html">photofilters</a></li>
           <li><a href="filters_preset_filters/filters_preset_filters-library.html">preset_filters</a></li>
     </ol>
@@ -45,8 +46,73 @@
 
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
       <section class="desc markdown">
-        <h1>photofilters</h1>
-<p>A new flutter package project.</p>
+        <h1>Photo Filters package for flutter</h1>
+<p>A flutter package for iOS and Android for applying filter to an image. A set of preset filters are also available. You can create your own filters too.</p>
+<h2>Installation</h2>
+<p>First, add <code>photofilters</code> and <code>image</code> as a <a href="https://flutter.io/platform-plugins/">dependency in your pubspec.yaml file</a>.</p>
+<h3>iOS</h3>
+<p>No configuration required - the plugin should work out of the box.</p>
+<h3>Android</h3>
+<p>No configuration required - the plugin should work out of the box.</p>
+<h3>Example</h3>
+<pre class="language-dart"><code class="language-dart">import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:photofilters/photofilters.dart';
+import 'package:image/image.dart' as imageLib;
+import 'package:image_picker/image_picker.dart';
+
+void main() =&gt; runApp(new MaterialApp(home: MyApp()));
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() =&gt; new _MyAppState();
+}
+
+class _MyAppState extends State&lt;MyApp&gt; {
+  imageLib.Image _image;
+  String fileName;
+  Filter _filter;
+  List&lt;Filter&gt; filters = presetFitersList;
+
+  Future getImage() async {
+    var imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    fileName = basename(imageFile.path);
+    var image = imageLib.decodeImage(imageFile.readAsBytesSync());
+    image = imageLib.copyResize(image, 600);
+    setState(() {
+      _image = image;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Photo Filter Example'),
+      ),
+      body: new Container(
+        alignment: Alignment(0.0, 0.0),
+        child: _image == null
+            ? new Text('No image selected.')
+            : new PhotoFilterSelector(
+                image: _image,
+                filters: presetFitersList,
+                filename: fileName,
+                loader: Center(child: CircularProgressIndicator()),
+              ),
+      ),
+      floatingActionButton: new FloatingActionButton(
+        onPressed: getImage,
+        tooltip: 'Pick Image',
+        child: new Icon(Icons.add_a_photo),
+      ),
+    );
+  }
+}
+</code></pre>
+<h2>UI Screen Shots</h2>
+<p><img alt="screenshot" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/screenshot.gif"></p>
+<h2>Sample Images of Filters</h2><table><thead><tr><th style="text-align: center;"></th><th style="text-align: center;"></th><th style="text-align: center;"></th></tr></thead><tbody><tr><td style="text-align: center;"><img width="1604" alt="No Filter" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/No Filter.jpg">  No Filter</td><td style="text-align: center;"><img width="1604" alt="AddictiveBlue" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/AddictiveBlue.jpg">  AddictiveBlue</td><td style="text-align: center;"><img width="1604" alt="AddictiveRed" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/AddictiveRed.jpg">  AddictiveRed</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Amaro" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Amaro.jpg">  Amaro</td><td style="text-align: center;"><img width="1604" alt="Ashby" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ashby.jpg">  Ashby</td><td style="text-align: center;"><img width="1604" alt="Brannan" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Brannan.jpg">  Brannan</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Charmes" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Charmes.jpg">  Charmes</td><td style="text-align: center;"><img width="1604" alt="Clarendon" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Clarendon.jpg">  Clarendon</td><td style="text-align: center;"><img width="1604" alt="Crema" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Crema.jpg">  Crema</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Earlybird" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Earlybird.jpg">  Earlybird</td><td style="text-align: center;"><img width="1604" alt="1977" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/1977.jpg">  1977</td><td style="text-align: center;"><img width="1604" alt="Gingham" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Gingham.jpg">  Gingham</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Hefe" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Hefe.jpg">  Hefe</td><td style="text-align: center;"><img width="1604" alt="Helena" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Helena.jpg">  Helena</td><td style="text-align: center;"><img width="1604" alt="Hudson" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Hudson.jpg">  Hudson</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Juno" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Juno.jpg">  Juno</td><td style="text-align: center;"><img width="1604" alt="Kelvin" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Kelvin.jpg">  Kelvin</td><td style="text-align: center;"><img width="1604" alt="Lark" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Lark.jpg">  Lark</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Ludwig" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Ludwig.jpg">  Ludwig</td><td style="text-align: center;"><img width="1604" alt="Maven" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Maven.jpg">  Maven</td><td style="text-align: center;"><img width="1604" alt="Mayfair" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Mayfair.jpg">  Mayfair</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Nashville" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Nashville.jpg">  Nashville</td><td style="text-align: center;"><img width="1604" alt="Perpetua" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Perpetua.jpg">  Perpetua</td><td style="text-align: center;"><img width="1604" alt="Reyes" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Reyes.jpg">  Reyes</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Sierra" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Sierra.jpg">  Sierra</td><td style="text-align: center;"><img width="1604" alt="Skyline" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Skyline.jpg">  Skyline</td><td style="text-align: center;"><img width="1604" alt="Slumber" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Slumber.jpg">  Slumber</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Sutro" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Sutro.jpg">  Sutro</td><td style="text-align: center;"><img width="1604" alt="Toaster" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Toaster.jpg">  Toaster</td><td style="text-align: center;"><img width="1604" alt="Valencia" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Valencia.jpg">  Valencia</td></tr><tr><td style="text-align: center;"><img width="1604" alt="Walden" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Walden.jpg">  Walden</td><td style="text-align: center;"><img width="1604" alt="Willow" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Willow.jpg">  Willow</td><td style="text-align: center;"><img width="1604" alt="X-Pro II" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/X-Pro II.jpg">  X-Pro II</td></tr></tbody></table>
 <h2>Getting Started</h2>
 <p>For help getting started with Flutter, view our online <a href="https://flutter.io/">documentation</a>.</p>
 <p>For help on editing package code, view the <a href="https://flutter.io/developing-packages/">documentation</a>.</p>
@@ -67,6 +133,11 @@
               
             </dd>            <dt id="image_utils">
               <span class="name"><a href="utils_image_utils/utils_image_utils-library.html">image_utils</a></span>
+            </dt>
+            <dd>
+              
+            </dd>            <dt id="photo_filter">
+              <span class="name"><a href="widgets_photo_filter/widgets_photo_filter-library.html">photo_filter</a></span>
             </dt>
             <dd>
               
