@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:photofilters/photofilters.dart';
@@ -14,17 +16,27 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   imageLib.Image _image;
   String fileName;
-  Filter _filter;
   List<Filter> filters = presetFitersList;
+  File imageFile;
 
-  Future getImage() async {
-    var imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+  Future getImage(context) async {
+    imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     fileName = basename(imageFile.path);
     var image = imageLib.decodeImage(imageFile.readAsBytesSync());
     image = imageLib.copyResize(image, 600);
-    setState(() {
-      _image = image;
-    });
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new PhotoFilterSelector(
+              title: Text("Photo Filter Example"),
+              image: _image,
+              filters: presetFitersList,
+              filename: fileName,
+              loader: Center(child: CircularProgressIndicator()),
+              fit: BoxFit.cover,
+            ),
+      ),
+    );
   }
 
   @override
@@ -38,16 +50,10 @@ class _MyAppState extends State<MyApp> {
             ? Center(
                 child: new Text('No image selected.'),
               )
-            : new PhotoFilterSelector(
-                image: _image,
-                filters: presetFitersList,
-                filename: fileName,
-                loader: Center(child: CircularProgressIndicator()),
-                fit: BoxFit.cover,
-              ),
+            : Image.file(imageFile),
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: getImage,
+        onPressed: () => getImage(context),
         tooltip: 'Pick Image',
         child: new Icon(Icons.add_a_photo),
       ),

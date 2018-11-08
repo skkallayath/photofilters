@@ -24,6 +24,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   image_picker:
+  path_provider:
 
   photofilters:
     path: ../
