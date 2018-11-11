@@ -17,7 +17,7 @@ void main() {
   test("test All", () {
     for (var filter in presetFitersList) {
       print('Applying ${filter.name}');
-      applyFilter(filter, 'test/res/a.png', 'test/out/${filter.name}.jpg');
+      applyFilter(filter, 'test/res/bird.jpg', 'test/out/${filter.name}.jpg');
     }
   });
 }

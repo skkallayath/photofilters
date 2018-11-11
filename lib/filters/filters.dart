@@ -1,32 +1,12 @@
 import 'dart:typed_data';
-import 'package:meta/meta.dart';
-import 'package:photofilters/utils/image_utils.dart' as utils;
 
 /**
  * The [Filter] class to define a Filter consists of multiple [SubFilter]s
  */
-class Filter extends Object {
+abstract class Filter extends Object {
   final String name;
-  final List<SubFilter> subFilters;
+  Filter({this.name}) : assert(name != null);
 
-  Filter({@required this.name})
-      : assert(name != null),
-        this.subFilters = [];
-
-  /**
-   * Apply the [Filter] to an Image.
-   */
-  void apply(Uint8List pixels) {
-    for (SubFilter subFilter in subFilters) {
-      subFilter.apply(pixels);
-    }
-  }
-}
-
-/**
- * The [SubFilter] class is the abstract class to define any SubFilter.
- */
-abstract class SubFilter extends Object {
   /**
    * Apply the [SubFilter] to an Image.
    */
@@ -34,150 +14,6 @@ abstract class SubFilter extends Object {
 }
 
 /**
- * The [ContrastSubFilter] class is a SubFilter class to apply [contrast] to an image.
+ * The [SubFilter] class is the abstract class to define any SubFilter.
  */
-class ContrastSubFilter implements SubFilter {
-  final num contrast;
-  ContrastSubFilter(this.contrast);
-
-  /**
-   * Apply the [ContrastSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.contrast(pixels, contrast);
-}
-
-/**
- * The [BrightnessSubFilter] class is a SubFilter class to apply [brightness] to an image.
- */
-class BrightnessSubFilter implements SubFilter {
-  final num brightness;
-  BrightnessSubFilter(this.brightness);
-
-  /**
-   * Apply the [BrightnessSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.brightness(pixels, brightness);
-}
-
-/**
- * The [SaturationSubFilter] class is a SubFilter class to apply [saturation] to an image.
- */
-class SaturationSubFilter implements SubFilter {
-  final num saturation;
-  SaturationSubFilter(this.saturation);
-
-  /**
-   * Apply the [SaturationSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.saturation(pixels, saturation);
-}
-
-/**
- * The [SepiaSubFilter] class is a SubFilter class to apply [sepia] to an image.
- */
-class SepiaSubFilter implements SubFilter {
-  final num sepia;
-  SepiaSubFilter(this.sepia);
-
-  /**
-   * Apply the [SepiaSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.sepia(pixels, sepia);
-}
-
-/**
- * The [GrayScaleSubFilter] class is a SubFilter class to apply GrayScale to an image.
- */
-class GrayScaleSubFilter implements SubFilter {
-  // final num grayScale;
-  // GrayScaleSubFilter(this.grayScale);
-
-  /**
-   * Apply the [GrayScaleSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.grayscale(pixels);
-}
-
-/**
- * The [InvertSubFilter] class is a SubFilter class to invert an image.
- */
-class InvertSubFilter implements SubFilter {
-  // final num invert;
-  // InvertSubFilter(this.invert);
-
-  /**
-   * Apply the [InvertSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.invert(pixels);
-}
-
-/**
- * The [HueRotationSubFilter] class is a SubFilter class to rotate hue in [degrees].
- */
-class HueRotationSubFilter implements SubFilter {
-  final int degrees;
-  HueRotationSubFilter(this.degrees);
-
-  /**
-   * Apply the [HueRotationSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.hueRotation(pixels, degrees);
-}
-
-/**
- * The [AddictiveColorSubFilter] class is a SubFilter class to emphasize a color using [red], [green] and [b] values.
- */
-class AddictiveColorSubFilter implements SubFilter {
-  final int red;
-  final int green;
-  final int blue;
-  AddictiveColorSubFilter(this.red, this.green, this.blue);
-
-  /**
-   * Apply the [AddictiveColorSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) =>
-      utils.addictiveColor(pixels, red, green, blue);
-}
-
-/**
- * The [RGBScaleSubFilter] class is a SubFilter class to scale RGB values of every pixels in an image.
- */
-class RGBScaleSubFilter implements SubFilter {
-  final num red;
-  final num green;
-  final num blue;
-  RGBScaleSubFilter(this.red, this.green, this.blue);
-
-  /**
-   * Apply the [RGBScaleSubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) => utils.rgbScale(pixels, red, green, blue);
-}
-
-/**
- * The [RGBOverlaySubFilter] class is a SubFilter class to apply an overlay to an image.
- */
-class RGBOverlaySubFilter implements SubFilter {
-  final num red;
-  final num green;
-  final num blue;
-  final num scale;
-  RGBOverlaySubFilter(this.red, this.green, this.blue, this.scale);
-
-  /**
-   * Apply the [RGBOverlaySubFilter] to an Image.
-   */
-  @override
-  void apply(Uint8List pixels) =>
-      utils.colorOverlay(pixels, red, green, blue, scale);
-}
+abstract class SubFilter extends Object {}
