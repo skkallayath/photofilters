@@ -22,9 +22,6 @@ class ClarendonFilter extends ColorFilter {
     subFilters.add(new ContrastSubFilter(.1));
     subFilters.add(new SaturationSubFilter(.15));
   }
-
-  @override
-  RGBA applyFIlter(RGBA color) {}
 }
 
 class AddictiveRedFilter extends ColorFilter {
