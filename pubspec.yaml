@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   image: ^2.0.4
   meta: ^1.1.6
+  path_provider:
 
 dev_dependencies:
   flutter_test:
@@ -19,7 +20,6 @@ dev_dependencies:
   test:
   image_picker:
   path:
-  path_provider:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

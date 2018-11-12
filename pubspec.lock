@@ -229,7 +229,7 @@ packages:
     source: hosted
     version: "1.6.2"
   path_provider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
