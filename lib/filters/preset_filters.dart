@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:photofilters/filters/color_filters.dart';
 import 'package:photofilters/filters/filters.dart';
 import 'package:photofilters/filters/subfilters.dart';
-import 'package:photofilters/models.dart';
 
 // NoFilter: No filter
 class NoFilter extends ColorFilter {

@@ -49,10 +49,7 @@ class PhotoFilter extends StatelessWidget {
   }
 }
 
-/**
- * The PhotoFilterSelector Widget for apply filter from a selected set of filters
- */
-
+///The PhotoFilterSelector Widget for apply filter from a selected set of filters
 class PhotoFilterSelector extends StatefulWidget {
   final Widget title;
 
@@ -305,9 +302,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   }
 }
 
-/**
- * The global applyfilter function
- */
+///The global applyfilter function
 List<int> applyFilter(Map<String, dynamic> params) {
   Filter filter = params["filter"];
   imageLib.Image image = params["image"];
@@ -323,9 +318,7 @@ List<int> applyFilter(Map<String, dynamic> params) {
   return _bytes;
 }
 
-/**
- * The global buildThumbnail function
- */
+///The global buildThumbnail function
 List<int> buildThumbnail(Map<String, dynamic> params) {
   int width = params["width"];
   params["image"] = imageLib.copyResize(params["image"], width);

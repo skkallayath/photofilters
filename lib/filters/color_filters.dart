@@ -3,19 +3,13 @@ import 'dart:typed_data';
 import 'package:photofilters/filters/filters.dart';
 import 'package:photofilters/models.dart';
 
-/**
- * The [ColorSubFilter] class is the abstract class to define any ColorSubFilter.
- */
+///The [ColorSubFilter] class is the abstract class to define any ColorSubFilter.
 abstract class ColorSubFilter extends SubFilter {
-  /**
-   * Apply the [SubFilter] to an Image.
-   */
+  ///Apply the [SubFilter] to an Image.
   RGBA applyFilter(RGBA color);
 }
 
-/**
- * The [ColorFilter] class to define a Filter which will applied to each color, consists of multiple [SubFilter]s
- */
+///The [ColorFilter] class to define a Filter which will applied to each color, consists of multiple [SubFilter]s
 abstract class ColorFilter extends Filter {
   List<ColorSubFilter> subFilters;
   ColorFilter({String name})
