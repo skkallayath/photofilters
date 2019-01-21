@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:photofilters/filters/filters.dart';
 
 ///The [ImageSubFilter] class is the abstract class to define any ImageSubFilter.
-abstract class ImageSubFilter extends SubFilter {
+mixin ImageSubFilter on SubFilter {
   ///Apply the [SubFilter] to an Image.
   void apply(Uint8List pixels);
 }
