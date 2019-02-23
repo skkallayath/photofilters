@@ -356,7 +356,7 @@ class CharmesFilter extends ColorFilter {
   }
 }
 
-List<Filter> presetFitersList = [
+List<Filter> presetFiltersList = [
   NoFilter(),
   AddictiveBlueFilter(),
   AddictiveRedFilter(),
