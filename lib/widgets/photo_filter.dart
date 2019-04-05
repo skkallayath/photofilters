@@ -85,7 +85,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   @override
   void initState() {
     super.initState();
-    loading = true;
+    loading = false;
     _filter = widget.filters[0];
     filename = widget.filename;
     image = widget.image;
