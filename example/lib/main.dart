@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   imageLib.Image _image;
   String fileName;
-  List<Filter> filters = presetFitersList;
+  List<Filter> filters = presetFiltersList;
   File imageFile;
 
   Future getImage(context) async {
@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context) => new PhotoFilterSelector(
               title: Text("Photo Filter Example"),
               image: _image,
-              filters: presetFitersList,
+              filters: presetFiltersList,
               filename: fileName,
               loader: Center(child: CircularProgressIndicator()),
               fit: BoxFit.cover,
