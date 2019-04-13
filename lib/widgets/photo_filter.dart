@@ -85,11 +85,12 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   @override
   void initState() {
     super.initState();
-    loading = true;
+    loading = false;
     _filter = widget.filters[0];
     filename = widget.filename;
     image = widget.image;
   }
+
 
   @override
   void dispose() {
@@ -112,7 +113,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                     });
                     var imageFile = await saveFilteredImage();
 
-                    Navigator.pop(context, imageFile);
+                    Navigator.pop(context, {'image_filtered':imageFile} );
                   },
                 )
         ],
