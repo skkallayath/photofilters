@@ -322,6 +322,6 @@ List<int> applyFilter(Map<String, dynamic> params) {
 ///The global buildThumbnail function
 List<int> buildThumbnail(Map<String, dynamic> params) {
   int width = params["width"];
-  params["image"] = imageLib.copyResize(params["image"], width);
+  params["image"] = imageLib.copyResize(params["image"], width: width);
   return applyFilter(params);
 }
