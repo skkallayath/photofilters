@@ -15,7 +15,7 @@ void applyFilter(Filter filter, String src, String dest) {
 
 void main() {
   test("test All", () {
-    for (var filter in presetFitersList) {
+    for (var filter in presetFiltersList) {
       print('Applying ${filter.name}');
       applyFilter(filter, 'test/res/bird.jpg', 'test/out/${filter.name}.jpg');
     }
