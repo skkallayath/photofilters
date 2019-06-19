@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  imageLib.Image _image;
   String fileName;
   List<Filter> filters = presetFiltersList;
   File imageFile;
@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     fileName = basename(imageFile.path);
     var image = imageLib.decodeImage(imageFile.readAsBytesSync());
-    image = imageLib.copyResize(image, 600);
+    image = imageLib.copyResize(image, width: 600);
      Map imagefile = await Navigator.push(
       context,
       new MaterialPageRoute(
