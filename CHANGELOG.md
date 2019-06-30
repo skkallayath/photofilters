@@ -19,3 +19,8 @@
 
 * BugFixes and Improvisations.
 * iOS issue fixed
+
+## [1.0.5] - 30 Jun 2019
+
+* BugFixes and Improvisations.
+* All dependant packages updated to latest version
