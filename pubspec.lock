@@ -129,14 +129,14 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.1.4"
   image_picker:
     dependency: "direct dev"
     description:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.10"
+    version: "0.6.0+10"
   io:
     dependency: transitive
     description:
@@ -234,7 +234,7 @@ packages:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.1"
+    version: "1.1.0"
   pedantic:
     dependency: transitive
     description:
@@ -414,7 +414,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.3"
+    version: "3.2.5"
   yaml:
     dependency: transitive
     description:
@@ -424,4 +424,4 @@ packages:
     version: "2.1.15"
 sdks:
   dart: ">=2.2.0 <3.0.0"
-  flutter: ">=0.1.4 <2.0.0"
+  flutter: ">=1.5.0 <2.0.0"

@@ -10,16 +10,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image: ^2.0.4
+  image: ^2.1.4
   meta: ^1.1.6
-  path_provider: ^0.4.1
+  path_provider: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   test:
-  image_picker:
-  path:
+  image_picker: ^0.6.0+10
+  path: ^1.6.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
