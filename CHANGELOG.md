@@ -24,3 +24,7 @@
 
 * BugFixes and Improvisations.
 * All dependant packages updated to latest version
+
+## [1.0.6] - 25 July 2020
+
+* Image Selector Widget Fixes
