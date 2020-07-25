@@ -1,11 +1,10 @@
 name: photofilters
 description: A flutter package for applying various types of filters to an image. You can create your own filters and subfilters too.
-version: 1.0.5
-author: Sharafudheen KK <skkallayath@gmail.com>
+version: 1.0.6
 homepage: https://github.com/skkallayath/photofilters
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
   flutter:
