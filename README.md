@@ -17,6 +17,9 @@ No configuration required - the plugin should work out of the box.
 ### Example
 
 ``` dart
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:photofilters/photofilters.dart';
@@ -31,19 +34,34 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  imageLib.Image _image;
   String fileName;
-  Filter _filter;
-  List<Filter> filters = presetFitersList;
+  List<Filter> filters = presetFiltersList;
+  File imageFile;
 
-  Future getImage() async {
-    var imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+  Future getImage(context) async {
+    imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     fileName = basename(imageFile.path);
     var image = imageLib.decodeImage(imageFile.readAsBytesSync());
-    image = imageLib.copyResize(image, 600);
-    setState(() {
-      _image = image;
-    });
+    image = imageLib.copyResize(image, width: 600);
+     Map imagefile = await Navigator.push(
+      context,
+      new MaterialPageRoute(
+        builder: (context) => new PhotoFilterSelector(
+              title: Text("Photo Filter Example"),
+              image: image,
+              filters: presetFiltersList,
+              filename: fileName,
+              loader: Center(child: CircularProgressIndicator()),
+              fit: BoxFit.contain,
+            ),
+      ),
+    );
+    if (imagefile != null && imagefile.containsKey('image_filtered')) {
+      setState(() {
+        imageFile = imagefile['image_filtered'];
+      });
+      print(imageFile.path);
+    }
   }
 
   @override
@@ -52,19 +70,17 @@ class _MyAppState extends State<MyApp> {
       appBar: new AppBar(
         title: new Text('Photo Filter Example'),
       ),
-      body: new Container(
-        alignment: Alignment(0.0, 0.0),
-        child: _image == null
-            ? new Text('No image selected.')
-            : new PhotoFilterSelector(
-                image: _image,
-                filters: presetFitersList,
-                filename: fileName,
-                loader: Center(child: CircularProgressIndicator()),
-              ),
+      body: Center(
+        child: new Container(
+          child: imageFile == null
+              ? Center(
+                  child: new Text('No image selected.'),
+                )
+              : Image.file(imageFile),
+        ),
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: getImage,
+        onPressed: () => getImage(context),
         tooltip: 'Pick Image',
         child: new Icon(Icons.add_a_photo),
       ),
