@@ -28,3 +28,8 @@
 ## [1.0.6] - 25 July 2020
 
 * Image Selector Widget Fixes
+
+## [2.0.0] - 02 Aug 2020
+
+* Convolution Filters Functionality Added
+* More information about creating subfilters and filters in README
