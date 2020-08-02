@@ -16,7 +16,7 @@ List<num> rgbToHsv(num r, num g, num b) {
   num h, s, v = _max;
 
   num d = _max - _min;
-  s = max == 0 ? 0 : d / _max;
+  s = _max == 0 ? 0 : d / _max;
 
   if (max == min) {
     h = 0; // achromatic

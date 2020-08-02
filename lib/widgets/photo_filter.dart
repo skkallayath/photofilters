@@ -315,7 +315,7 @@ List<int> applyFilter(Map<String, dynamic> params) {
   String filename = params["filename"];
   List<int> _bytes = image.getBytes();
   if (filter != null) {
-    filter.apply(_bytes);
+    filter.apply(_bytes, image.width, image.height);
   }
   imageLib.Image _image =
       imageLib.Image.fromBytes(image.width, image.height, _bytes);

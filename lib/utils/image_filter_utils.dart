@@ -130,9 +130,11 @@ void rgbScale(Uint8List bytes, num red, num green, num blue) {
 }
 
 // Convolute - weights are 3x3 matrix
-void convolute(Uint8List bytes, int width, int height, List<num> weights) {
+void convolute(
+    Uint8List pixels, int width, int height, List<num> weights, num bias) {
+  var bytes = Uint8List.fromList(pixels);
   int side = sqrt(weights.length).round();
-  int halfSide = ~~(side / 2).round();
+  int halfSide = ~~(side / 2).round() - side % 2;
   int sw = width;
   int sh = height;
 
@@ -144,23 +146,25 @@ void convolute(Uint8List bytes, int width, int height, List<num> weights) {
       int sy = y;
       int sx = x;
       int dstOff = (y * w + x) * 4;
-      int r = 0, g = 0, b = 0;
+      num r = bias, g = bias, b = bias;
       for (int cy = 0; cy < side; cy++) {
         for (int cx = 0; cx < side; cx++) {
           int scy = sy + cy - halfSide;
           int scx = sx + cx - halfSide;
+
           if (scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
             int srcOff = (scy * sw + scx) * 4;
-            int wt = weights[cy * side + cx];
+            num wt = weights[cy * side + cx];
+
             r += bytes[srcOff] * wt;
             g += bytes[srcOff + 1] * wt;
             b += bytes[srcOff + 2] * wt;
           }
         }
       }
-      bytes[dstOff] = clampPixel(r);
-      bytes[dstOff + 1] = clampPixel(g);
-      bytes[dstOff + 2] = clampPixel(b);
+      pixels[dstOff] = clampPixel(r.round());
+      pixels[dstOff + 1] = clampPixel(g.round());
+      pixels[dstOff + 2] = clampPixel(b.round());
     }
   }
 }

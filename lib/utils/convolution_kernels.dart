@@ -1,5 +1,5 @@
 class ConvolutionKernel extends Object {
-  final List<int> convolution;
+  final List<num> convolution;
   final double bias;
 
   ConvolutionKernel(this.convolution, {this.bias = 0.0});
@@ -7,7 +7,6 @@ class ConvolutionKernel extends Object {
 
 ConvolutionKernel identityKernel =
     new ConvolutionKernel([0, 0, 0, 0, 1, 0, 0, 0, 0]);
-ConvolutionKernel brightenKernel = ConvolutionKernel([10]);
 ConvolutionKernel sharpenKernel =
     new ConvolutionKernel([-1, -1, -1, -1, 9, -1, -1, -1, -1]);
 ConvolutionKernel embossKernel =
@@ -46,3 +45,178 @@ ConvolutionKernel blurKernel = new ConvolutionKernel([
   0,
   0
 ]);
+
+ConvolutionKernel gaussian3x3Kernel = new ConvolutionKernel([
+  1,
+  2,
+  1,
+  2,
+  4,
+  2,
+  1,
+  2,
+  1,
+]);
+
+ConvolutionKernel gaussian5x5Kernel = new ConvolutionKernel([
+  2,
+  04,
+  05,
+  04,
+  2,
+  4,
+  09,
+  12,
+  09,
+  4,
+  5,
+  12,
+  15,
+  12,
+  5,
+  4,
+  09,
+  12,
+  09,
+  4,
+  2,
+  04,
+  05,
+  04,
+  2
+]);
+
+ConvolutionKernel gaussian7x7Kernel = new ConvolutionKernel([
+  1,
+  1,
+  2,
+  2,
+  2,
+  1,
+  1,
+  1,
+  2,
+  2,
+  4,
+  2,
+  2,
+  1,
+  2,
+  2,
+  4,
+  8,
+  4,
+  2,
+  2,
+  2,
+  4,
+  8,
+  16,
+  8,
+  4,
+  2,
+  2,
+  2,
+  4,
+  8,
+  4,
+  2,
+  2,
+  1,
+  2,
+  2,
+  4,
+  2,
+  2,
+  1,
+  1,
+  1,
+  2,
+  2,
+  2,
+  1,
+  1,
+]);
+
+ConvolutionKernel mean3x3Kernel = new ConvolutionKernel([
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+]);
+
+ConvolutionKernel mean5x5Kernel = new ConvolutionKernel([
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1
+]);
+
+ConvolutionKernel lowPass3x3Kernel = new ConvolutionKernel([
+  1,
+  2,
+  1,
+  2,
+  4,
+  2,
+  1,
+  2,
+  1,
+]);
+
+ConvolutionKernel lowPass5x5Kernel = new ConvolutionKernel([
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+  4,
+  4,
+  4,
+  1,
+  1,
+  4,
+  12,
+  4,
+  1,
+  1,
+  4,
+  4,
+  4,
+  1,
+  1,
+  1,
+  1,
+  1,
+  1,
+]);
+
+ConvolutionKernel highPass3x3Kernel =
+    new ConvolutionKernel([0, -0.25, 0, -0.25, 2, -0.25, 0, -0.25, 0]);

@@ -6,7 +6,7 @@ abstract class Filter extends Object {
   Filter({this.name}) : assert(name != null);
 
   ///Apply the [SubFilter] to an Image.
-  void apply(Uint8List pixels);
+  void apply(Uint8List pixels, int width, int height);
 }
 
 ///The [SubFilter] class is the abstract class to define any SubFilter.
