@@ -19,12 +19,12 @@ var presetConvolutionFiltersList = [
     ..subFilters.add(ConvolutionSubFilter.fromKernel(edgeDetectionHardKernel)),
   new ImageFilter(name: "Blur")
     ..subFilters.add(ConvolutionSubFilter.fromKernel(blurKernel)),
-  new ImageFilter(name: "Gaussian 3x3")
-    ..subFilters.add(ConvolutionSubFilter.fromKernel(gaussian3x3Kernel)),
-  new ImageFilter(name: "Gaussian 5x5")
-    ..subFilters.add(ConvolutionSubFilter.fromKernel(gaussian5x5Kernel)),
-  new ImageFilter(name: "Gaussian 7x7")
-    ..subFilters.add(ConvolutionSubFilter.fromKernel(gaussian7x7Kernel)),
+  new ImageFilter(name: "Guassian 3x3")
+    ..subFilters.add(ConvolutionSubFilter.fromKernel(Guassian3x3Kernel)),
+  new ImageFilter(name: "Guassian 5x5")
+    ..subFilters.add(ConvolutionSubFilter.fromKernel(Guassian5x5Kernel)),
+  new ImageFilter(name: "Guassian 7x7")
+    ..subFilters.add(ConvolutionSubFilter.fromKernel(Guassian7x7Kernel)),
   new ImageFilter(name: "Mean 3x3")
     ..subFilters.add(ConvolutionSubFilter.fromKernel(mean3x3Kernel)),
   new ImageFilter(name: "Mean 5x5")
