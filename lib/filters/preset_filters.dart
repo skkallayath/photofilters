@@ -9,7 +9,7 @@ class NoFilter extends ColorFilter {
   NoFilter() : super(name: "No Filter");
 
   @override
-  void apply(Uint8List pixels) {
+  void apply(Uint8List pixels, int width, int height) {
     // Do nothing
   }
 }

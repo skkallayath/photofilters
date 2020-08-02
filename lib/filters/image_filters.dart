@@ -5,7 +5,7 @@ import 'package:photofilters/filters/filters.dart';
 ///The [ImageSubFilter] class is the abstract class to define any ImageSubFilter.
 mixin ImageSubFilter on SubFilter {
   ///Apply the [SubFilter] to an Image.
-  void apply(Uint8List pixels);
+  void apply(Uint8List pixels, int width, int height);
 }
 
 class ImageFilter extends Filter {
@@ -17,9 +17,9 @@ class ImageFilter extends Filter {
 
   ///Apply the [SubFilter] to an Image.
   @override
-  void apply(Uint8List pixels) {
+  void apply(Uint8List pixels, int width, int height) {
     for (ImageSubFilter subFilter in subFilters) {
-      subFilter.apply(pixels);
+      subFilter.apply(pixels, width, height);
     }
   }
 }

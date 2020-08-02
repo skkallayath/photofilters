@@ -17,7 +17,7 @@ abstract class ColorFilter extends Filter {
         super(name: name);
 
   @override
-  void apply(Uint8List bytes) {
+  void apply(Uint8List bytes, int width, int height) {
     for (int i = 0; i < bytes.length; i += 4) {
       RGBA color = RGBA(
           red: bytes[i],
