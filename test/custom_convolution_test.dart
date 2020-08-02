@@ -12,7 +12,7 @@ void main() {
       coloredEdgeDetectionKernel,
     ));
     customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
-      gaussian7x7Kernel,
+      Guassian7x7Kernel,
     ));
     customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
       sharpenKernel,
