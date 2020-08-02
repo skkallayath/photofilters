@@ -14,7 +14,7 @@ void main() {
     ));
     customFilter.addSubFilters([
       ConvolutionSubFilter.fromKernel(
-        Guassian7x7Kernel,
+        guassian7x7Kernel,
       ),
       ConvolutionSubFilter.fromKernel(
         sharpenKernel,
