@@ -111,6 +111,39 @@ class _MyAppState extends State<MyApp> {
 | <img width="1604" alt="Walden" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Walden.jpg">  Walden | <img width="1604" alt="Willow" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/Willow.jpg">  Willow | <img width="1604" alt="X-Pro II" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/X-Pro II.jpg">  X-Pro II  | |
 
 
+## Sample Images of Convolution Filters
+
+| | | |
+|:-------------------------:|:-------------------------:|:-------------------------:|
+| <img width="1604" alt="Identity" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Identity.jpg">  Identity | <img width="1604" alt="Emboss" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Emboss.jpg">  Emboss | <img width="1604" alt="Sharpen" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Sharpen.jpg">  Sharpen | <img width="1604" alt="Colored Edge Detection" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Colored Edge Detection.jpg">  Colored Edge Detection  | 
+| <img width="1604" alt="Blur" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Blur.jpg">  Blur | <img width="1604" alt="Edge Detection Medium" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Edge Detection Medium.jpg">  Edge Detection Medium | <img width="1604" alt="Edge Detection Hard" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Edge Detection Hard.jpg">  Edge Detection Hard | <img width="1604" alt="Guasian Blur" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Guassian 7x7.jpg">  Guassian Blur  | 
+| <img width="1604" alt="Low Pass" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Low Pass 5x5.jpg">  Low Pass | <img width="1604" alt="High Pass" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/High Pass 3x3.jpg">  High Pass | <img width="1604" alt="Mean" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Mean.jpg">  Mean | |
+
+
+### Custom filters
+
+You can create your own custom filters too
+
+```dart
+    var customFilter = new ImageFilter(name: "Custom Filter");
+    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+      coloredEdgeDetectionKernel,
+    ));
+    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+      gaussian7x7Kernel,
+    ));
+    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+      sharpenKernel,
+    ));
+    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+      highPass3x3Kernel,
+    ));
+    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+      lowPass3x3Kernel,
+    ));
+    customFilter.subFilters.add(SaturationSubFilter(0.5));
+```
+
 ## Getting Started
 
 For help getting started with Flutter, view our online [documentation](https://flutter.io/).

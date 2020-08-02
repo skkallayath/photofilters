@@ -165,24 +165,24 @@ class RGBOverlaySubFilter extends ColorSubFilter with ImageSubFilter {
       color_filter_utils.colorOverlay(color, red, green, blue, scale);
 }
 
-///The [ConvoultionSubFilter] class is a ImageFilter class to apply a convolution to an image.
-class ConvoultionSubFilter implements ImageSubFilter {
+///The [ConvolutionSubFilter] class is a ImageFilter class to apply a convolution to an image.
+class ConvolutionSubFilter implements ImageSubFilter {
   final List<num> weights;
   final num bias;
 
-  ConvoultionSubFilter(this.weights, [this.bias = 0]);
+  ConvolutionSubFilter(this.weights, [this.bias = 0]);
 
-  ConvoultionSubFilter.fromKernel(ConvolutionKernel kernel)
+  ConvolutionSubFilter.fromKernel(ConvolutionKernel kernel)
       : this(kernel.convolution, kernel.bias);
 
-  ///Apply the [ConvoultionSubFilter] to an Image.
+  ///Apply the [ConvolutionSubFilter] to an Image.
   @override
   void apply(Uint8List pixels, int width, int height) =>
       image_filter_utils.convolute(pixels, width, height,
           this._normalizeKernel(this.weights), this.bias);
 
   List<num> _normalizeKernel(List<num> kernel) {
-    var sum = 0;
+    num sum = 0;
     for (var i = 0; i < kernel.length; i++) {
       sum += kernel[i];
     }

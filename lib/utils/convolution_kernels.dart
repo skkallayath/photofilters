@@ -217,3 +217,6 @@ ConvolutionKernel lowPass5x5Kernel = new ConvolutionKernel([
   1,
   1,
 ]);
+
+ConvolutionKernel highPass3x3Kernel =
+    new ConvolutionKernel([0, -0.25, 0, -0.25, 2, -0.25, 0, -0.25, 0]);
