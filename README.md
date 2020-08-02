@@ -120,29 +120,100 @@ class _MyAppState extends State<MyApp> {
 | <img width="1604" alt="Low Pass" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Low%20Pass%205x5.jpg">  Low Pass | <img width="1604" alt="High Pass" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/High%20Pass%203x3.jpg">  High Pass | <img width="1604" alt="Mean" src="https://raw.githubusercontent.com/skkallayath/photofilters/master/exampleimages/convolution/Mean%205x5.jpg">  Mean | |
 
 
-### Custom filters
+## Filters
 
-You can create your own custom filters too
+There are two types of filters. `ImageFilter` and `ColorFilter`.
+
+### Image Filter
+
+Image filter applies its subfilters directly to the whole image one by one. It is computationally expensive since the complexity & time increases as the number of  subfilters increases.
+
+You can create your own custom image filter as like this:
 
 ```dart
-    var customFilter = new ImageFilter(name: "Custom Filter");
-    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+    import 'package:photofilters/filters/image_filters.dart';
+
+    var customImageFilter = new ImageFilter(name: "Custom Image Filter");
+    customImageFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
       coloredEdgeDetectionKernel,
     ));
-    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+    customImageFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
       gaussian7x7Kernel,
     ));
-    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+    customImageFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
       sharpenKernel,
     ));
-    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+    customImageFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
       highPass3x3Kernel,
     ));
-    customFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
+    customImageFilter.subFilters.add(ConvolutionSubFilter.fromKernel(
       lowPass3x3Kernel,
     ));
-    customFilter.subFilters.add(SaturationSubFilter(0.5));
+    customImageFilter.subFilters.add(SaturationSubFilter(0.5));
 ```
+
+You can also inherit the ImageFilter class to create another image filter.
+
+```dart
+
+class MyImageFilter extends ImageFilter {
+  MyImageFilter(): super(name: "My Custom Image Filter") {
+    this.addSubFilter(ConvolutionSubFilter.fromKernel(sharpenKernel));
+  }
+}
+```
+
+### Color Filter
+
+Color filter applies its subfilters to each pixel one by one. It is computationally less expensive than the ImageFilter. It will loop through the image pixels only once irrespective of the number of subfilters.
+
+
+You can create your own custom color filter as like this:
+
+```dart
+    import 'package:photofilters/filters/color_filters.dart';
+
+    var customColorFilter = new ColorFilter(name: "Custom Color Filter");
+    customColorFilter.addSubFilter(SaturationSubFilter(0.5));
+    customColorFilter
+        .addSubFilters([BrightnessSubFilter(0.5), HueRotationSubFilter(30)]);
+
+```
+
+You can inherit the ColorFilter class too
+
+```dart
+
+class MyColorFilter extends ColorFilter {
+  MyColorFilter() : super(name: "My Custom Color Filter") {
+    this.addSubFilter(BrightnessSubFilter(0.8));
+    this.addSubFilter(HueRotationSubFilter(30));
+  }
+}
+
+```
+
+## Sub filters
+
+There are two types of subfilters. One can be added to the `ColorFilter` and the other can be added to the `ImageFilter`. You can inherit `ColorSubFilter` class to implement the former and you can use the `ImageSubFilter` mixin to implement the latter. You can create a same subfilter that can be used for both Image and Color Filters. The `BrightnessSubFilter` is an example of this.
+
+```dart
+class BrightnessSubFilter extends ColorSubFilter with ImageSubFilter {
+  final num brightness;
+  BrightnessSubFilter(this.brightness);
+
+  ///Apply the [BrightnessSubFilter] to an Image.
+  @override
+  void apply(Uint8List pixels, int width, int height) =>
+      image_filter_utils.brightness(pixels, brightness);
+
+  ///Apply the [BrightnessSubFilter] to a color.
+  @override
+  RGBA applyFilter(RGBA color) =>
+      color_filter_utils.brightness(color, brightness);
+}
+```
+
 
 ## Getting Started
 

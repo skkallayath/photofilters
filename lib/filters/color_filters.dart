@@ -10,7 +10,7 @@ abstract class ColorSubFilter extends SubFilter {
 }
 
 ///The [ColorFilter] class to define a Filter which will applied to each color, consists of multiple [SubFilter]s
-abstract class ColorFilter extends Filter {
+class ColorFilter extends Filter {
   List<ColorSubFilter> subFilters;
   ColorFilter({String name})
       : subFilters = [],
@@ -32,5 +32,13 @@ abstract class ColorFilter extends Filter {
       bytes[i + 2] = color.blue;
       bytes[i + 3] = color.alpha;
     }
+  }
+
+  void addSubFilter(ColorSubFilter subFilter) {
+    this.subFilters.add(subFilter);
+  }
+
+  void addSubFilters(List<ColorSubFilter> subFilters) {
+    this.subFilters.addAll(subFilters);
   }
 }

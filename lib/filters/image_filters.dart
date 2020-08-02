@@ -22,4 +22,12 @@ class ImageFilter extends Filter {
       subFilter.apply(pixels, width, height);
     }
   }
+
+  void addSubFilter(ImageSubFilter subFilter) {
+    this.subFilters.add(subFilter);
+  }
+
+  void addSubFilters(List<ImageSubFilter> subFilters) {
+    this.subFilters.addAll(subFilters);
+  }
 }
