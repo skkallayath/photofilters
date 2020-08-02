@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:photofilters/filters/filters.dart';
 import 'package:image/image.dart' as imageLib;
 import 'package:path_provider/path_provider.dart';
+import 'package:photofilters/filters/filters.dart';
 
 class PhotoFilter extends StatelessWidget {
   final imageLib.Image image;
@@ -13,6 +13,7 @@ class PhotoFilter extends StatelessWidget {
   final Filter filter;
   final BoxFit fit;
   final Widget loader;
+
   PhotoFilter({
     @required this.image,
     @required this.filename,
@@ -53,7 +54,7 @@ class PhotoFilter extends StatelessWidget {
 ///The PhotoFilterSelector Widget for apply filter from a selected set of filters
 class PhotoFilterSelector extends StatefulWidget {
   final Widget title;
-
+  final Color appBarColor;
   final List<Filter> filters;
   final imageLib.Image image;
   final Widget loader;
@@ -66,6 +67,7 @@ class PhotoFilterSelector extends StatefulWidget {
     @required this.title,
     @required this.filters,
     @required this.image,
+    this.appBarColor = Colors.blue,
     this.loader = const Center(child: CircularProgressIndicator()),
     this.fit = BoxFit.fill,
     @required this.filename,
@@ -99,80 +101,83 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: widget.title,
-        actions: <Widget>[
-          loading
-              ? Container()
-              : IconButton(
-                  icon: Icon(Icons.check),
-                  onPressed: () async {
-                    setState(() {
-                      loading = true;
-                    });
-                    var imageFile = await saveFilteredImage();
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: widget.title,
+          backgroundColor: widget.appBarColor,
+          actions: <Widget>[
+            loading
+                ? Container()
+                : IconButton(
+                    icon: Icon(Icons.check),
+                    onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      var imageFile = await saveFilteredImage();
 
-                    Navigator.pop(context, {'image_filtered': imageFile});
-                  },
-                )
-        ],
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: loading
-            ? widget.loader
-            : Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    flex: 6,
-                    child: Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      padding: EdgeInsets.all(12.0),
-                      child: _buildFilteredImage(
-                        _filter,
-                        image,
-                        filename,
+                      Navigator.pop(context, {'image_filtered': imageFile});
+                    },
+                  )
+          ],
+        ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: loading
+              ? widget.loader
+              : Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      flex: 6,
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        padding: EdgeInsets.all(12.0),
+                        child: _buildFilteredImage(
+                          _filter,
+                          image,
+                          filename,
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: widget.filters.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            child: Container(
-                              padding: EdgeInsets.all(5.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  _buildFilterThumbnail(
-                                      widget.filters[index], image, filename),
-                                  SizedBox(
-                                    height: 5.0,
-                                  ),
-                                  Text(
-                                    widget.filters[index].name,
-                                  )
-                                ],
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: widget.filters.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              child: Container(
+                                padding: EdgeInsets.all(5.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    _buildFilterThumbnail(
+                                        widget.filters[index], image, filename),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      widget.filters[index].name,
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                            onTap: () => setState(() {
-                              _filter = widget.filters[index];
-                            }),
-                          );
-                        },
+                              onTap: () => setState(() {
+                                _filter = widget.filters[index];
+                              }),
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+        ),
       ),
     );
   }
