@@ -33,3 +33,7 @@
 
 * Convolution Filters Functionality Added
 * More information about creating subfilters and filters in README
+
+## [2.0.1] - 02 Aug 2020
+
+* Flutter analyze fuxes
