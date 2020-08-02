@@ -24,17 +24,17 @@ class _MyAppState extends State<MyApp> {
     fileName = basename(imageFile.path);
     var image = imageLib.decodeImage(imageFile.readAsBytesSync());
     image = imageLib.copyResize(image, width: 600);
-     Map imagefile = await Navigator.push(
+    Map imagefile = await Navigator.push(
       context,
       new MaterialPageRoute(
         builder: (context) => new PhotoFilterSelector(
-              title: Text("Photo Filter Example"),
-              image: image,
-              filters: presetFiltersList,
-              filename: fileName,
-              loader: Center(child: CircularProgressIndicator()),
-              fit: BoxFit.contain,
-            ),
+          title: Text("Photo Filter Example"),
+          image: image,
+          filters: presetFiltersList,
+          filename: fileName,
+          loader: Center(child: CircularProgressIndicator()),
+          fit: BoxFit.contain,
+        ),
       ),
     );
     if (imagefile != null && imagefile.containsKey('image_filtered')) {

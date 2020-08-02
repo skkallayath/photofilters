@@ -20,11 +20,11 @@ var presetConvolutionFiltersList = [
   new ImageFilter(name: "Blur")
     ..addSubFilter(ConvolutionSubFilter.fromKernel(blurKernel)),
   new ImageFilter(name: "Guassian 3x3")
-    ..addSubFilter(ConvolutionSubFilter.fromKernel(Guassian3x3Kernel)),
+    ..addSubFilter(ConvolutionSubFilter.fromKernel(guassian3x3Kernel)),
   new ImageFilter(name: "Guassian 5x5")
-    ..addSubFilter(ConvolutionSubFilter.fromKernel(Guassian5x5Kernel)),
+    ..addSubFilter(ConvolutionSubFilter.fromKernel(guassian5x5Kernel)),
   new ImageFilter(name: "Guassian 7x7")
-    ..addSubFilter(ConvolutionSubFilter.fromKernel(Guassian7x7Kernel)),
+    ..addSubFilter(ConvolutionSubFilter.fromKernel(guassian7x7Kernel)),
   new ImageFilter(name: "Mean 3x3")
     ..addSubFilter(ConvolutionSubFilter.fromKernel(mean3x3Kernel)),
   new ImageFilter(name: "Mean 5x5")

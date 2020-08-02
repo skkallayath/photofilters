@@ -46,7 +46,7 @@ ConvolutionKernel blurKernel = new ConvolutionKernel([
   0
 ]);
 
-ConvolutionKernel Guassian3x3Kernel = new ConvolutionKernel([
+ConvolutionKernel guassian3x3Kernel = new ConvolutionKernel([
   1,
   2,
   1,
@@ -58,7 +58,7 @@ ConvolutionKernel Guassian3x3Kernel = new ConvolutionKernel([
   1,
 ]);
 
-ConvolutionKernel Guassian5x5Kernel = new ConvolutionKernel([
+ConvolutionKernel guassian5x5Kernel = new ConvolutionKernel([
   2,
   04,
   05,
@@ -86,7 +86,7 @@ ConvolutionKernel Guassian5x5Kernel = new ConvolutionKernel([
   2
 ]);
 
-ConvolutionKernel Guassian7x7Kernel = new ConvolutionKernel([
+ConvolutionKernel guassian7x7Kernel = new ConvolutionKernel([
   1,
   1,
   2,
