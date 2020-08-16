@@ -18,9 +18,11 @@ class _MyAppState extends State<MyApp> {
   String fileName;
   List<Filter> filters = presetFiltersList;
   File imageFile;
+  final picker = ImagePicker();
 
   Future getImage(context) async {
-    imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    imageFile = File(pickedFile.path);
     fileName = basename(imageFile.path);
     var image = imageLib.decodeImage(imageFile.readAsBytesSync());
     image = imageLib.copyResize(image, width: 600);
