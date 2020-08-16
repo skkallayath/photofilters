@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as imagelib;
 import 'package:path_provider/path_provider.dart';
 import 'package:photofilters/filters/filters.dart';
-import 'package:photofilters/filters/preset_filters.dart';
-
-enum ApplyFilterStatus { LOADING, SUCCESS, ERROR }
+import 'package:worker_manager/worker_manager.dart';
 
 class PhotoFilter extends StatelessWidget {
   PhotoFilter({
@@ -94,18 +91,23 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   Filter _filter;
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
-    loading = false;
+    loading = true;
+    warmUpExector();
     _filter = widget.filters[0];
     filename = widget.filename;
     image = widget.image;
     thumbnailImage = imagelib.copyResize(image, width: 84, height: 84);
+  }
+
+  void warmUpExector() async {
+    await Executor().warmUp();
+    if (mounted) {
+      setState(() {
+        loading = false;
+      });
+    }
   }
 
   Future<String> get _localPath async {
@@ -226,17 +228,6 @@ List<int> applyFilter(Map<String, dynamic> params) {
   return _bytes;
 }
 
-class IsolateConfiguration {
-  const IsolateConfiguration(this.sendPort, this.params);
-
-  final Map<String, dynamic> params;
-  final SendPort sendPort;
-}
-
-void isolateFunc(IsolateConfiguration isolateConfiguration) =>
-    isolateConfiguration.sendPort
-        .send(applyFilter(isolateConfiguration.params));
-
 ///The global buildThumbnail function
 List<int> buildThumbnail(Map<String, dynamic> params) {
   int width = params['width'];
@@ -271,79 +262,60 @@ class _BuiltFilteredThumbnail extends StatefulWidget {
 }
 
 class __BuiltFilteredThumbnailState extends State<_BuiltFilteredThumbnail> {
-  ApplyFilterStatus applyFilterStatus = ApplyFilterStatus.LOADING;
-  ReceivePort errorPort;
-  Isolate isolate;
-  Map<String, dynamic> params;
-  ReceivePort receivePort;
+  Cancelable<List<int>> applyFilterCancelable;
 
   @override
   void dispose() {
-    receivePort.close();
-    errorPort.close();
-    isolate?.kill(priority: Isolate.immediate);
+    applyFilterCancelable?.cancel();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    receivePort = ReceivePort();
-    errorPort = ReceivePort();
-    initIsolate();
-    receivePort.listen(
-      (dynamic data) {
-        widget.cachedFilters[widget.filter.name] = data;
-        setState(() {
-          applyFilterStatus = ApplyFilterStatus.SUCCESS;
-        });
-      },
-    );
-    errorPort.listen((dynamic errorData) {
-      final exception = Exception(errorData[0]);
-      final stack = StackTrace.fromString(errorData[1] as String);
-      print('$exception, $stack');
-      setState(() {
-        applyFilterStatus = ApplyFilterStatus.ERROR;
-      });
-    });
-  }
-
-  void initIsolate() async {
     if (widget.cachedFilters[widget.filter?.name ?? '_'] == null) {
-      isolate = await Isolate.spawn(
-          isolateFunc,
-          IsolateConfiguration(receivePort.sendPort, <String, dynamic>{
-            'filter': widget.filter,
-            'image': widget.image,
-            'filename': widget.filename,
-          }),
-          onError: errorPort.sendPort);
+      applyFilterCancelable = Executor().execute(arg1: <String, dynamic>{
+        'filter': widget.filter,
+        'image': widget.image,
+        'filename': widget.filename,
+      }, fun1: applyFilter);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     if (widget.cachedFilters[widget.filter?.name ?? '_'] == null) {
-      if (applyFilterStatus == ApplyFilterStatus.LOADING) {
-        return Container(
-            width: 100,
-            height: 100,
-            alignment: Alignment.center,
-            child: widget.loader);
-      } else if (applyFilterStatus == ApplyFilterStatus.ERROR) {
-        return Center(child: Text('Error'));
-      }
-      return Container(
-        width: 100,
-        height: 100,
-        child: CircleAvatar(
-          radius: 50.0,
-          backgroundImage: MemoryImage(
-            widget.cachedFilters[widget.filter.name],
-          ),
-          backgroundColor: Colors.white,
-        ),
+      return FutureBuilder<List<int>>(
+        future: applyFilterCancelable,
+        builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return Container(
+                  width: 100,
+                  height: 100,
+                  alignment: Alignment.center,
+                  child: widget.loader);
+            case ConnectionState.done:
+              if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              }
+              widget.cachedFilters[widget.filter?.name ?? '_'] = snapshot.data;
+              return Container(
+                width: 100,
+                height: 100,
+                child: CircleAvatar(
+                  radius: 50.0,
+                  backgroundImage: MemoryImage(
+                    snapshot.data,
+                  ),
+                  backgroundColor: Colors.white,
+                ),
+              );
+          }
+          return null; // unreachable
+        },
       );
     } else {
       return Container(
@@ -393,81 +365,64 @@ class _BuiltFilteredImage extends StatefulWidget {
 }
 
 class __BuiltFilteredImageState extends State<_BuiltFilteredImage> {
-  ApplyFilterStatus applyFilterStatus = ApplyFilterStatus.LOADING;
-  ReceivePort errorPort;
-  Isolate isolate;
-  ReceivePort receivePort;
+  Cancelable<List<int>> applyFilterCancelable;
 
   @override
   void dispose() {
-    receivePort.close();
-    errorPort.close();
-    isolate?.kill(priority: Isolate.immediate);
+    applyFilterCancelable?.cancel();
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    receivePort = ReceivePort();
-    errorPort = ReceivePort();
-    initIsolate();
-    receivePort.listen(
-      (dynamic data) {
-        widget.cachedFilters[widget.filter.name] = data;
-        setState(() {
-          applyFilterStatus = ApplyFilterStatus.SUCCESS;
-        });
-      },
-    );
-    errorPort.listen((dynamic errorData) {
-      final exception = Exception(errorData[0]);
-      final stack = StackTrace.fromString(errorData[1] as String);
-      print('$exception, $stack');
-      setState(() {
-        applyFilterStatus = ApplyFilterStatus.ERROR;
-      });
-    });
-  }
-
-  void initIsolate() async {
     if (widget.cachedFilters[widget.filter?.name ?? '_'] == null) {
-      isolate = await Isolate.spawn(
-          isolateFunc,
-          IsolateConfiguration(receivePort.sendPort, <String, dynamic>{
-            'filter': widget.filter,
-            'image': widget.image,
-            'filename': widget.filename,
-          }),
-          onError: errorPort.sendPort);
+      applyFilterCancelable = Executor().execute(arg1: <String, dynamic>{
+        'filter': widget.filter,
+        'image': widget.image,
+        'filename': widget.filename,
+      }, fun1: applyFilter);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     if (widget.cachedFilters[widget.filter?.name ?? '_'] == null) {
-      if (applyFilterStatus == ApplyFilterStatus.LOADING) {
-        return widget.loader;
-      } else if (applyFilterStatus == ApplyFilterStatus.ERROR) {
-        Center(child: Text('Error'));
-      }
-      return widget.circleShape
-          ? SizedBox(
-              height: MediaQuery.of(context).size.width / 3,
-              width: MediaQuery.of(context).size.width / 3,
-              child: Center(
-                child: CircleAvatar(
-                  radius: MediaQuery.of(context).size.width / 3,
-                  backgroundImage: MemoryImage(
-                    widget.cachedFilters[widget.filter.name],
-                  ),
-                ),
-              ),
-            )
-          : Image.memory(
-              widget.cachedFilters[widget.filter.name],
-              fit: BoxFit.contain,
-            );
+      return FutureBuilder<List<int>>(
+        future: applyFilterCancelable,
+        builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return widget.loader;
+            case ConnectionState.active:
+            case ConnectionState.waiting:
+              return widget.loader;
+            case ConnectionState.done:
+              if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              }
+              widget.cachedFilters[widget.filter?.name ?? '_'] = snapshot.data;
+              return widget.circleShape
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.width / 3,
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: Center(
+                        child: CircleAvatar(
+                          radius: MediaQuery.of(context).size.width / 3,
+                          backgroundImage: MemoryImage(
+                            snapshot.data,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Image.memory(
+                      snapshot.data,
+                      fit: BoxFit.contain,
+                    );
+          }
+          return null; // unreachable
+        },
+      );
     } else {
       return widget.circleShape
           ? SizedBox(

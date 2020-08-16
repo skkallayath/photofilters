@@ -12,6 +12,7 @@ dependencies:
   image: ^2.1.14
   meta: ^1.2.2
   path_provider: ^1.6.11
+  worker_manager: ^3.0.0
   
 dev_dependencies:
   flutter_test:
