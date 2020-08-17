@@ -91,6 +91,12 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   Filter _filter;
 
   @override
+  void dispose() {
+    Executor().close();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     loading = true;

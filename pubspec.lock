@@ -495,10 +495,12 @@ packages:
   worker_manager:
     dependency: "direct main"
     description:
-      name: worker_manager
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
+      path: "."
+      ref: master
+      resolved-ref: eb7de42dd464a81cd20aa4ee3943352d3753ddf4
+      url: "git://github.com/prtm/worker_manager"
+    source: git
+    version: "2.10.0"
   xdg_directories:
     dependency: transitive
     description:
