@@ -75,8 +75,8 @@ class PhotoFilterSelector extends StatefulWidget {
   final BoxFit fit;
   final imagelib.Image image;
   final Widget loader;
-  final Widget title;
   final Filter selectFilter;
+  final Widget title;
 
   @override
   State<StatefulWidget> createState() => _PhotoFilterSelectorState();
@@ -94,14 +94,16 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 
   @override
   void dispose() {
-    Executor().close();
+    if (!Executor().isClosed) {
+      Executor().close();
+    }
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    loading = true;
+    loading = Executor().isClosed;
     warmUpExector();
     if (widget.selectFilter != null &&
         widget.filters.contains(widget.selectFilter)) {
@@ -115,11 +117,13 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   }
 
   void warmUpExector() async {
-    await Executor().warmUp();
-    if (mounted) {
-      setState(() {
-        loading = false;
-      });
+    if (Executor().isClosed) {
+      await Executor().warmUp();
+      if (mounted) {
+        setState(() {
+          loading = false;
+        });
+      }
     }
   }
 
@@ -157,8 +161,10 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                     });
                     var imageFile = await saveFilteredImage();
 
-                    Navigator.pop(context,
-                        {'imageFiltered': imageFile, 'selectedFilter': _filter});
+                    Navigator.pop(context, {
+                      'imageFiltered': imageFile,
+                      'selectedFilter': _filter
+                    });
                   },
                 )
         ],
