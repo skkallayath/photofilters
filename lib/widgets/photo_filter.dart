@@ -104,7 +104,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   void initState() {
     super.initState();
     loading = Executor().isClosed;
-    warmUpExector();
+    warmUpExecutor();
     if (widget.selectFilter != null &&
         widget.filters.contains(widget.selectFilter)) {
       _filter = widget.selectFilter;
@@ -116,7 +116,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
     thumbnailImage = imagelib.copyResize(image, width: 84, height: 84);
   }
 
-  void warmUpExector() async {
+  void warmUpExecutor() async {
     if (Executor().isClosed) {
       await Executor().warmUp();
       if (mounted) {
