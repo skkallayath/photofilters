@@ -64,6 +64,7 @@ class PhotoFilterSelector extends StatefulWidget {
       this.loader = const Center(child: CircularProgressIndicator()),
       this.fit = BoxFit.fill,
       @required this.filename,
+      this.selectFilter,
       this.circleShape = false})
       : super(key: key);
 
@@ -75,6 +76,7 @@ class PhotoFilterSelector extends StatefulWidget {
   final imagelib.Image image;
   final Widget loader;
   final Widget title;
+  final Filter selectFilter;
 
   @override
   State<StatefulWidget> createState() => _PhotoFilterSelectorState();
@@ -101,7 +103,12 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
     super.initState();
     loading = true;
     warmUpExector();
-    _filter = widget.filters[0];
+    if (widget.selectFilter != null &&
+        widget.filters.contains(widget.selectFilter)) {
+      _filter = widget.selectFilter;
+    } else {
+      _filter = widget.filters[0];
+    }
     filename = widget.filename;
     image = widget.image;
     thumbnailImage = imagelib.copyResize(image, width: 84, height: 84);
@@ -150,7 +157,8 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                     });
                     var imageFile = await saveFilteredImage();
 
-                    Navigator.pop(context, {'image_filtered': imageFile});
+                    Navigator.pop(context,
+                        {'imageFiltered': imageFile, 'selectedFilter': _filter});
                   },
                 )
         ],
