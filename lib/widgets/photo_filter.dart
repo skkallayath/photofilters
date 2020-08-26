@@ -162,8 +162,8 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                     var imageFile = await saveFilteredImage();
 
                     Navigator.pop(context, {
-                      'imageFiltered': imageFile,
-                      'selectedFilter': _filter
+                      'image_filtered': imageFile,
+                      'selected_filter': _filter
                     });
                   },
                 )

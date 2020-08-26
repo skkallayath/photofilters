@@ -4,14 +4,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:photofilters/photofilters.dart';
+// ignore: library_prefixes
 import 'package:image/image.dart' as imageLib;
 import 'package:image_picker/image_picker.dart';
 
-void main() => runApp(new MaterialApp(home: MyApp()));
+void main() => runApp(MaterialApp(home: MyApp()));
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => new _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -26,11 +27,11 @@ class _MyAppState extends State<MyApp> {
     fileName = basename(imageFile.path);
     var image = imageLib.decodeImage(imageFile.readAsBytesSync());
     image = imageLib.copyResize(image, width: 600);
-    Map imagefile = await Navigator.push(
+    var imagefile = await Navigator.push(
       context,
-      new MaterialPageRoute(
-        builder: (context) => new PhotoFilterSelector(
-          title: Text("Photo Filter Example"),
+      MaterialPageRoute(
+        builder: (context) => PhotoFilterSelector(
+          title: Text('Photo Filter Example'),
           image: image,
           filters: presetFiltersList,
           filename: fileName,
@@ -39,6 +40,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+    print(imagefile);
     if (imagefile != null && imagefile.containsKey('image_filtered')) {
       setState(() {
         imageFile = imagefile['image_filtered'];
@@ -49,23 +51,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Photo Filter Example'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Photo Filter Example'),
       ),
       body: Center(
-        child: new Container(
+        child: Container(
           child: imageFile == null
               ? Center(
-                  child: new Text('No image selected.'),
+                  child: Text('No image selected.'),
                 )
               : Image.file(imageFile),
         ),
       ),
-      floatingActionButton: new FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () => getImage(context),
         tooltip: 'Pick Image',
-        child: new Icon(Icons.add_a_photo),
+        child: Icon(Icons.add_a_photo),
       ),
     );
   }
