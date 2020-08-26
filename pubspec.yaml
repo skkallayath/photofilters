@@ -9,16 +9,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image: ^2.1.4
-  meta: ^1.1.6
-  path_provider: ^1.1.0
-
+  image: ^2.1.14
+  meta: ^1.2.2
+  path_provider: ^1.6.11
+  worker_manager:
+    git:
+      url: git://github.com/prtm/worker_manager
+      ref: master
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
   test:
-  image_picker: ^0.6.0+10
-  path: ^1.6.2
+  image_picker: ^0.6.7+4
+  path: ^1.7.0
+  pedantic: ^1.9.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec
