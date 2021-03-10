@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:photofilters/filters/image_filters.dart';
 import 'package:photofilters/filters/subfilters.dart';
 import 'package:photofilters/utils/convolution_kernels.dart';

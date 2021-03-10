@@ -1,3 +1,5 @@
+// @dart=2.9
+
 class ConvolutionKernel extends Object {
   final List<num> convolution;
   final double bias;

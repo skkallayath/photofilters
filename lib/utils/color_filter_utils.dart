@@ -1,5 +1,6 @@
 import 'dart:math';
 
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:photofilters/models.dart';
 import 'package:photofilters/utils/utils.dart' as imageUtils;
 
@@ -85,7 +86,7 @@ RGBA brightness(RGBA color, num adj) {
   adj = (adj < -1) ? -1 : adj;
   adj = ~~(255 * adj).round();
   return new RGBA(
-      red: clampPixel(color.red + adj),
+      red: clampPixel(color.red + (adj as int)),
       green: clampPixel(color.green + adj),
       blue: clampPixel(color.blue + adj),
       alpha: color.alpha);
@@ -97,9 +98,9 @@ RGBA hueSaturation(RGBA color, num adj) {
   hsv[1] *= adj;
   var rgb = imageUtils.hsvToRgb(hsv[0], hsv[1], hsv[2]);
   return new RGBA(
-    red: clampPixel(rgb[0]),
-    green: clampPixel(rgb[1]),
-    blue: clampPixel(rgb[2]),
+    red: clampPixel(rgb[0] as int),
+    green: clampPixel(rgb[1] as int),
+    blue: clampPixel(rgb[2] as int),
     alpha: color.alpha,
   );
 }

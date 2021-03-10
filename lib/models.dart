@@ -1,3 +1,5 @@
+// @dart=2.9
+
 class RGBA extends Object {
   final int red;
   final int green;

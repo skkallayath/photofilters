@@ -27,6 +27,8 @@ List<num> rgbToHsv(num r, num g, num b) {
       h = (b - r) / d + 2;
     } else if (_max == b) {
       h = (r - g) / d + 4;
+    } else {
+      h = 0;
     }
   }
 
@@ -39,42 +41,46 @@ List<num> hsvToRgb(num h, num s, num v) {
   int r, g, b;
 
   int i = (h * 6).floor();
-  int f = h * 6 - i;
-  int p = v * (1 - s);
-  int q = v * (1 - f * s);
-  int t = v * (1 - (1 - f) * s);
+  int f = h * 6 - i as int;
+  int p = v * (1 - s) as int;
+  int q = v * (1 - f * s) as int;
+  int t = v * (1 - (1 - f) * s) as int;
 
   switch (i % 6) {
     case 0:
-      r = v;
+      r = v as int;
       g = t;
       b = p;
       break;
     case 1:
       r = q;
-      g = v;
+      g = v as int;
       b = p;
       break;
     case 2:
       r = p;
-      g = v;
+      g = v as int;
       b = t;
       break;
     case 3:
       r = p;
       g = q;
-      b = v;
+      b = v as int;
       break;
     case 4:
       r = t;
       g = p;
-      b = v;
+      b = v as int;
       break;
     case 5:
-      r = v;
+      r = v as int;
       g = p;
       b = q;
       break;
+    default:
+      r = 0;
+      g = 0;
+      b = 0;
   }
 
   return [r * 255, g * 255, b * 255];

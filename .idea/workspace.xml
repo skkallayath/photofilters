@@ -1,36 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/main.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
   </component>
-  <component name="ToolWindowManager">
-    <editor active="true" />
-    <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-    </layout>
+  <component name="ChangeListManager">
+    <list default="true" id="df1de0d6-418a-4e87-95c3-060ae90cd14f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/filters/color_filters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/filters/color_filters.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/filters/convolution_filters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/filters/convolution_filters.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/filters/filters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/filters/filters.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/filters/image_filters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/filters/image_filters.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/filters/preset_filters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/filters/preset_filters.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/filters/subfilters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/filters/subfilters.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/photofilters.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/photofilters.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/color_filter_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/color_filter_utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/convolution_kernels.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/convolution_kernels.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/image_filter_utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/image_filter_utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/photo_filter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/photo_filter.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/photofilters.iml" beforeDir="false" afterPath="$PROJECT_DIR$/photofilters.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/convolution_test.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/custom_filters_test.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/photofilters_test.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_utils.dart" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <option name="show-excluded-files" value="false" />
-      </pane>
-    </panes>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="dart.analysis.tool.window.force.activate" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615347190051">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1615347190051" />
+    <state x="221" y="89" key="SettingsEditor" timestamp="1615347197430">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1615347197430" />
   </component>
 </project>
