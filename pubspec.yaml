@@ -9,9 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  image: ^2.1.4
+  image: ^3.0.1
   meta: ^1.1.6
-  path_provider: ^1.1.0
+  path_provider: ^2.0.1
 
 dev_dependencies:
   flutter_test:
