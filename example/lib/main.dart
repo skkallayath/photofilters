@@ -17,12 +17,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String fileName;
   List<Filter> filters = presetFiltersList;
+  final picker = ImagePicker();
   File imageFile;
 
   Future getImage(context) async {
-    imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if(pickedFile!=null){
+    imageFile = new File(pickedFile.path);
     fileName = basename(imageFile.path);
-    var image = imageLib.decodeImage(imageFile.readAsBytesSync());
+    var image = imageLib.decodeImage(await imageFile.readAsBytes());
     image = imageLib.copyResize(image, width: 600);
     Map imagefile = await Navigator.push(
       context,
@@ -37,11 +40,13 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+    
     if (imagefile != null && imagefile.containsKey('image_filtered')) {
       setState(() {
         imageFile = imagefile['image_filtered'];
       });
       print(imageFile.path);
+    }
     }
   }
 
@@ -57,7 +62,7 @@ class _MyAppState extends State<MyApp> {
               ? Center(
                   child: new Text('No image selected.'),
                 )
-              : Image.file(imageFile),
+              : Image.file(new File(imageFile.path)),
         ),
       ),
       floatingActionButton: new FloatingActionButton(

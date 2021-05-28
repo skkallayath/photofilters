@@ -80,7 +80,7 @@ void brightness(Uint8List bytes, num adj) {
   adj = (adj < -1) ? -1 : adj;
   adj = ~~(255 * adj).round();
   for (int i = 0; i < bytes.length; i += 4) {
-    bytes[i] = clampPixel(bytes[i] + adj);
+    bytes[i] = clampPixel(bytes[i] + (adj as int));
     bytes[i + 1] = clampPixel(bytes[i + 1] + adj);
     bytes[i + 2] = clampPixel(bytes[i + 2] + adj);
   }
@@ -90,11 +90,11 @@ void brightness(Uint8List bytes, num adj) {
 void hueSaturation(Uint8List bytes, num adj) {
   for (int i = 0; i < bytes.length; i += 4) {
     var hsv = rgbToHsv(bytes[i], bytes[i + 1], bytes[i + 2]);
-    hsv[1] *= adj;
-    var rgb = hsvToRgb(hsv[0], hsv[1], hsv[2]);
-    bytes[i] = clampPixel(rgb[0]);
-    bytes[i + 1] = clampPixel(rgb[1]);
-    bytes[i + 2] = clampPixel(rgb[2]);
+    hsv[1] = (hsv[1] ?? 0) * adj;
+    var rgb = hsvToRgb(hsv[0]!, hsv[1]!, hsv[2]!);
+    bytes[i] = clampPixel(rgb[0] as int);
+    bytes[i + 1] = clampPixel(rgb[1] as int);
+    bytes[i + 2] = clampPixel(rgb[2] as int);
   }
 }
 
