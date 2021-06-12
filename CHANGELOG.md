@@ -41,3 +41,7 @@
 ## [2.0.2] - 02 Aug 2020
 
 - Dependency package version upgrade
+
+## [3.0.0] - 12 Jun 2021
+
+- Null Safety
