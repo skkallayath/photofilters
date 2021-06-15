@@ -254,7 +254,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
     if (cachedFilters[filter?.name ?? "_"] == null) {
       return FutureBuilder<List<int>>(
         future: compute(
-            applyFilter as List<int> Function(Map<String, dynamic>),
+            applyFilter,
             <String, dynamic>{
               "filter": filter,
               "image": image,
