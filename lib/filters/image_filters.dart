@@ -9,7 +9,7 @@ mixin ImageSubFilter on SubFilter {
 }
 
 class ImageFilter extends Filter {
-  List<ImageSubFilter> subFilters;
+  final List<ImageSubFilter> subFilters;
 
   ImageFilter({required String name})
       : subFilters = [],

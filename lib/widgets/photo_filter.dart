@@ -14,7 +14,7 @@ class PhotoFilter extends StatelessWidget {
   final BoxFit fit;
   final Widget loader;
 
-  PhotoFilter({
+  const PhotoFilter({
     required this.image,
     required this.filename,
     required this.filter,
@@ -76,7 +76,7 @@ class PhotoFilterSelector extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => new _PhotoFilterSelectorState();
+  State<StatefulWidget> createState() => _PhotoFilterSelectorState();
 }
 
 class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
@@ -315,24 +315,22 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
 }
 
 ///The global applyfilter function
-FutureOr<List<int>> applyFilter(Map<String, dynamic> params) {
-  Filter? filter = params["filter"];
-  imageLib.Image image = params["image"];
-  String filename = params["filename"];
-  List<int> _bytes = image.getBytes();
+List<int> applyFilter(Map<String, dynamic> params) {
+  final Filter? filter = params["filter"];
+  final imageLib.Image image = params["image"];
+  final String filename = params["filename"];
+  final Uint8List _bytes = image.getBytes();
   if (filter != null) {
     filter.apply(_bytes as dynamic, image.width, image.height);
   }
   imageLib.Image _image =
-      imageLib.Image.fromBytes(image.width, image.height, _bytes);
-  _bytes = imageLib.encodeNamedImage(_image, filename)!;
-
-  return _bytes;
+      imageLib.Image.fromBytes(width: image.width, height: image.height, bytes: _bytes.buffer);
+  return imageLib.encodeNamedImage(filename, _image)!;
 }
 
 ///The global buildThumbnail function
-FutureOr<List<int>> buildThumbnail(Map<String, dynamic> params) {
-  int? width = params["width"];
+List<int> buildThumbnail(Map<String, dynamic> params) {
+  final int? width = params["width"];
   params["image"] = imageLib.copyResize(params["image"], width: width);
   return applyFilter(params);
 }
