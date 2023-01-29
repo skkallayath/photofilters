@@ -7,8 +7,8 @@ int clampPixel(int x) => x.clamp(0, 255);
 void saturation(Uint8List bytes, num saturation) {
   saturation = (saturation < -1) ? -1 : saturation;
   for (int i = 0; i < bytes.length; i += 4) {
-    num r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
-    num gray =
+    final num r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
+    final num gray =
         0.2989 * r + 0.5870 * g + 0.1140 * b; //weights from CCIR 601 spec
     bytes[i] =
         clampPixel((-gray * saturation + bytes[i] * (1 + saturation)).round());
@@ -20,11 +20,11 @@ void saturation(Uint8List bytes, num saturation) {
 }
 
 void hueRotation(Uint8List bytes, int degrees) {
-  double U = cos(degrees * pi / 180);
-  double W = sin(degrees * pi / 180);
+  final double U = cos(degrees * pi / 180);
+  final double W = sin(degrees * pi / 180);
 
   for (int i = 0; i < bytes.length; i += 4) {
-    num r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
+    final num r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
     bytes[i] = clampPixel(((.299 + .701 * U + .168 * W) * r +
             (.587 - .587 * U + .330 * W) * g +
             (.114 - .114 * U - .497 * W) * b)
@@ -42,8 +42,8 @@ void hueRotation(Uint8List bytes, int degrees) {
 
 void grayscale(Uint8List bytes) {
   for (int i = 0; i < bytes.length; i += 4) {
-    int r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
-    int avg = clampPixel((0.2126 * r + 0.7152 * g + 0.0722 * b).round());
+    final int r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
+    final int avg = clampPixel((0.2126 * r + 0.7152 * g + 0.0722 * b).round());
     bytes[i] = avg;
     bytes[i + 1] = avg;
     bytes[i + 2] = avg;
@@ -53,7 +53,7 @@ void grayscale(Uint8List bytes) {
 // Adj is 0 (unchanged) to 1 (sepia)
 void sepia(Uint8List bytes, num adj) {
   for (int i = 0; i < bytes.length; i += 4) {
-    int r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
+    final int r = bytes[i], g = bytes[i + 1], b = bytes[i + 2];
     bytes[i] = clampPixel(
         ((r * (1 - (0.607 * adj))) + (g * .769 * adj) + (b * .189 * adj))
             .round());
@@ -89,9 +89,9 @@ void brightness(Uint8List bytes, num adj) {
 // Better result (slow) - adj should be < 1 (desaturated) to 1 (unchanged) and < 1
 void hueSaturation(Uint8List bytes, num adj) {
   for (int i = 0; i < bytes.length; i += 4) {
-    var hsv = rgbToHsv(bytes[i], bytes[i + 1], bytes[i + 2]);
+    final hsv = rgbToHsv(bytes[i], bytes[i + 1], bytes[i + 2]);
     hsv[1] = (hsv[1] ?? 0) * adj;
-    var rgb = hsvToRgb(hsv[0]!, hsv[1]!, hsv[2]!);
+    final rgb = hsvToRgb(hsv[0]!, hsv[1]!, hsv[2]!);
     bytes[i] = clampPixel(rgb[0] as int);
     bytes[i + 1] = clampPixel(rgb[1] as int);
     bytes[i + 2] = clampPixel(rgb[2] as int);
@@ -101,7 +101,7 @@ void hueSaturation(Uint8List bytes, num adj) {
 // Contrast - the adj value should be -1 to 1
 void contrast(Uint8List bytes, num adj) {
   adj *= 255;
-  double factor = (259 * (adj + 255)) / (255 * (259 - adj));
+  final double factor = (259 * (adj + 255)) / (255 * (259 - adj));
   for (int i = 0; i < bytes.length; i += 4) {
     bytes[i] = clampPixel((factor * (bytes[i] - 128) + 128).round());
     bytes[i + 1] = clampPixel((factor * (bytes[i + 1] - 128) + 128).round());
@@ -132,29 +132,29 @@ void rgbScale(Uint8List bytes, num red, num green, num blue) {
 // Convolute - weights are 3x3 matrix
 void convolute(
     Uint8List pixels, int width, int height, List<num> weights, num bias) {
-  var bytes = Uint8List.fromList(pixels);
-  int side = sqrt(weights.length).round();
-  int halfSide = ~~(side / 2).round() - side % 2;
-  int sw = width;
-  int sh = height;
+  final bytes = Uint8List.fromList(pixels);
+  final int side = sqrt(weights.length).round();
+  final int halfSide = ~~(side / 2).round() - side % 2;
+  final int sw = width;
+  final int sh = height;
 
-  int w = sw;
-  int h = sh;
+  final int w = sw;
+  final int h = sh;
 
   for (int y = 0; y < h; y++) {
     for (int x = 0; x < w; x++) {
-      int sy = y;
-      int sx = x;
-      int dstOff = (y * w + x) * 4;
+      final int sy = y;
+      final int sx = x;
+      final int dstOff = (y * w + x) * 4;
       num r = bias, g = bias, b = bias;
       for (int cy = 0; cy < side; cy++) {
         for (int cx = 0; cx < side; cx++) {
-          int scy = sy + cy - halfSide;
-          int scx = sx + cx - halfSide;
+          final int scy = sy + cy - halfSide;
+          final int scx = sx + cx - halfSide;
 
           if (scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
-            int srcOff = (scy * sw + scx) * 4;
-            num wt = weights[cy * side + cx];
+            final int srcOff = (scy * sw + scx) * 4;
+            final num wt = weights[cy * side + cx];
 
             r += bytes[srcOff] * wt;
             g += bytes[srcOff + 1] * wt;

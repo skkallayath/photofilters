@@ -4,7 +4,7 @@ import 'test_utils.dart';
 
 void main() {
   test("test All", () {
-    for (var filter in presetFiltersList) {
+    for (final filter in presetFiltersList) {
       print('Applying ${filter.name}');
       applyFilterOnFile(filter, 'res/bird.jpg', 'out/${filter.name}.jpg');
     }
