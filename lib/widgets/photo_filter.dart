@@ -25,13 +25,11 @@ class PhotoFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<int>>(
-      future: compute(
-          applyFilter,
-          <String, dynamic>{
-            "filter": filter,
-            "image": image,
-            "filename": filename,
-          }),
+      future: compute(applyFilter, <String, dynamic>{
+        "filter": filter,
+        "image": image,
+        "filename": filename,
+      }),
       builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
@@ -187,13 +185,11 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
       Filter filter, imageLib.Image? image, String? filename) {
     if (cachedFilters[filter.name] == null) {
       return FutureBuilder<List<int>>(
-        future: compute(
-            applyFilter ,
-            <String, dynamic>{
-              "filter": filter,
-              "image": image,
-              "filename": filename,
-            }),
+        future: compute(applyFilter, <String, dynamic>{
+          "filter": filter,
+          "image": image,
+          "filename": filename,
+        }),
         builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -253,13 +249,11 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
       Filter? filter, imageLib.Image? image, String? filename) {
     if (cachedFilters[filter?.name ?? "_"] == null) {
       return FutureBuilder<List<int>>(
-        future: compute(
-            applyFilter,
-            <String, dynamic>{
-              "filter": filter,
-              "image": image,
-              "filename": filename,
-            }),
+        future: compute(applyFilter, <String, dynamic>{
+          "filter": filter,
+          "image": image,
+          "filename": filename,
+        }),
         builder: (BuildContext context, AsyncSnapshot<List<int>> snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -323,9 +317,14 @@ FutureOr<List<int>> applyFilter(Map<String, dynamic> params) {
   if (filter != null) {
     filter.apply(_bytes as dynamic, image.width, image.height);
   }
-  imageLib.Image _image =
-      imageLib.Image.fromBytes(image.width, image.height, _bytes);
-  _bytes = imageLib.encodeNamedImage(_image, filename)!;
+
+  Uint8List bytes = Uint8List.fromList(_bytes);
+  imageLib.Image _image = imageLib.Image.fromBytes(
+      width: image.width, height: image.height, bytes: bytes.buffer);
+  _bytes = imageLib.encodeNamedImage(
+    filename,
+    _image,
+  )!;
 
   return _bytes;
 }

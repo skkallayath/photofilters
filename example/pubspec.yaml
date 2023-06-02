@@ -14,7 +14,7 @@ dependencies:
   photofilters:
     path: ../
   path: ^1.8.3
-  image: ^3.3.0
+  image: ^4.0.17
 
 dev_dependencies:
   flutter_test:
