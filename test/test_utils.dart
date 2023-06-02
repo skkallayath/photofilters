@@ -10,7 +10,7 @@ void applyFilterOnFile(Filter filter, String src, String dest) {
 
   Image out = Image.fromBytes(
       width: image.width, height: image.height, bytes: pixels.buffer);
-  new File(dest).writeAsBytesSync(encodeNamedImage(
+  File(dest).writeAsBytesSync(encodeNamedImage(
     dest,
     out,
   )!);

@@ -24,7 +24,7 @@ class ImageFilter extends Filter {
   }
 
   void addSubFilter(ImageSubFilter subFilter) {
-    this.subFilters.add(subFilter);
+    subFilters.add(subFilter);
   }
 
   void addSubFilters(List<ImageSubFilter> subFilters) {
