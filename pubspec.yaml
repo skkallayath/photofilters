@@ -19,7 +19,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   test: ^1.24.1
-
+  flutter_lints: ^2.0.1
 flutter:
 
   # To add assets to your package, add an assets section, like this:
