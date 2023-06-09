@@ -177,9 +177,8 @@ class ConvolutionSubFilter implements ImageSubFilter {
 
   ///Apply the [ConvolutionSubFilter] to an Image.
   @override
-  void apply(Uint8List pixels, int width, int height) =>
-      image_filter_utils.convolute(pixels, width, height,
-          this._normalizeKernel(this.weights), this.bias);
+  void apply(Uint8List pixels, int width, int height) => image_filter_utils
+      .convolute(pixels, width, height, _normalizeKernel(weights), bias);
 
   List<num> _normalizeKernel(List<num> kernel) {
     num sum = 0;

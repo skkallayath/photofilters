@@ -17,25 +17,25 @@ class ColorFilter extends Filter {
         super(name: name);
 
   @override
-  void apply(Uint8List bytes, int width, int height) {
-    for (int i = 0; i < bytes.length; i += 4) {
+  void apply(Uint8List pixels, int width, int height) {
+    for (int i = 0; i < pixels.length; i += 4) {
       RGBA color = RGBA(
-          red: bytes[i],
-          green: bytes[i + 1],
-          blue: bytes[i + 2],
-          alpha: bytes[i + 3]);
+          red: pixels[i],
+          green: pixels[i + 1],
+          blue: pixels[i + 2],
+          alpha: pixels[i + 3]);
       for (ColorSubFilter subFilter in subFilters) {
         color = subFilter.applyFilter(color);
       }
-      bytes[i] = color.red;
-      bytes[i + 1] = color.green;
-      bytes[i + 2] = color.blue;
-      bytes[i + 3] = color.alpha;
+      pixels[i] = color.red;
+      pixels[i + 1] = color.green;
+      pixels[i + 2] = color.blue;
+      pixels[i + 3] = color.alpha;
     }
   }
 
   void addSubFilter(ColorSubFilter subFilter) {
-    this.subFilters.add(subFilter);
+    subFilters.add(subFilter);
   }
 
   void addSubFilters(List<ColorSubFilter> subFilters) {

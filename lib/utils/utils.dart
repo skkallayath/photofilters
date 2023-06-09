@@ -5,27 +5,27 @@ List<num?> rgbToHsv(num r, num g, num b) {
   g /= 255;
   b /= 255;
 
-  num _max = max(
+  num maxVal = max(
     r,
     max(g, b),
   );
-  num _min = min(
+  num minVal = min(
     r,
     max(g, b),
   );
-  num? h, s, v = _max;
+  num? h, s, v = maxVal;
 
-  num d = _max - _min;
-  s = _max == 0 ? 0 : d / _max;
+  num d = maxVal - minVal;
+  s = maxVal == 0 ? 0 : d / maxVal;
 
   if (max == min) {
     h = 0; // achromatic
   } else {
-    if (_max == r) {
+    if (maxVal == r) {
       h = (g - b) / d + (g < b ? 6 : 0);
-    } else if (_max == g) {
+    } else if (maxVal == g) {
       h = (b - r) / d + 2;
-    } else if (_max == b) {
+    } else if (maxVal == b) {
       h = (r - g) / d + 4;
     }
   }
