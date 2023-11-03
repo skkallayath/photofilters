@@ -18,21 +18,38 @@ class ColorFilter extends Filter {
 
   @override
   void apply(Uint8List pixels, int width, int height) {
-    for (int i = 0; i < pixels.length; i += 4) {
-      RGBA color = RGBA(
-          red: pixels[i],
-          green: pixels[i + 1],
-          blue: pixels[i + 2],
-          alpha: pixels[i + 3]);
-      for (ColorSubFilter subFilter in subFilters) {
-        color = subFilter.applyFilter(color);
+    int remainingValue = pixels.length % 4;
+    if (remainingValue == 0) {
+      for (int i = 0; i < pixels.length; i += 4) {
+        RGBA color = RGBA(
+            red: pixels[i],
+            green: pixels[i + 1],
+            blue: pixels[i + 2],
+            alpha: pixels[i + 3]);
+        for (ColorSubFilter subFilter in subFilters) {
+          color = subFilter.applyFilter(color);
+        }
+        pixels[i] = color.red;
+        pixels[i + 1] = color.green;
+        pixels[i + 2] = color.blue;
+        pixels[i + 3] = color.alpha;
       }
-      pixels[i] = color.red;
-      pixels[i + 1] = color.green;
-      pixels[i + 2] = color.blue;
-      pixels[i + 3] = color.alpha;
-    }
-  }
+    } else {
+      for (int i = 0; i < pixels.length - remainingValue; i += 4) {
+        RGBA color = RGBA(
+            red: pixels[i],
+            green: pixels[i + 1],
+            blue: pixels[i + 2],
+            alpha: pixels[i + 3]);
+        for (ColorSubFilter subFilter in subFilters) {
+          color = subFilter.applyFilter(color);
+        }
+        pixels[i] = color.red;
+        pixels[i + 1] = color.green;
+        pixels[i + 2] = color.blue;
+        pixels[i + 3] = color.alpha;
+      }
+  }}
 
   void addSubFilter(ColorSubFilter subFilter) {
     subFilters.add(subFilter);
