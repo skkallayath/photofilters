@@ -7,6 +7,11 @@ void applyFilterOnFile(Filter filter, String src, String dest) {
   Image image = decodeImage(File(src).readAsBytesSync())!;
   var pixels = image.getBytes();
   filter.apply(pixels, image.width, image.height);
-  Image out = Image.fromBytes(image.width, image.height, pixels);
-  new File(dest).writeAsBytesSync(encodeNamedImage(out, dest)!);
+
+  Image out = Image.fromBytes(
+      width: image.width, height: image.height, bytes: pixels.buffer);
+  File(dest).writeAsBytesSync(encodeNamedImage(
+    dest,
+    out,
+  )!);
 }

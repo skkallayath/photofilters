@@ -45,3 +45,14 @@
 ## [3.0.0] - 12 Jun 2021
 
 - Null Safety
+
+## [3.0.1] - 15 Jun 2021
+
+- Cast error bug fix
+
+## [3.0.2] - 02 Jun 2023
+
+- Dart 3.0 Implemented
+- Dependency package version upgrade
+- flutter_lints package added
+- flutter_lints rules followed
