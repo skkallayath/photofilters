@@ -113,13 +113,15 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                 : IconButton(
                     icon: const Icon(Icons.check),
                     onPressed: () async {
-                      setState(() {
-                        loading = true;
-                      });
-                      var imageFile = await saveFilteredImage();
+                      if (cachedFilters[_filter?.name ?? "_"] != null) {
+                        setState(() {
+                          loading = true;
+                        });
+                        var imageFile = await saveFilteredImage();
 
-                      // ignore: use_build_context_synchronously
-                      Navigator.pop(context, {'image_filtered': imageFile});
+                        // ignore: use_build_context_synchronously
+                        Navigator.pop(context, {'image_filtered': imageFile});
+                      }
                     },
                   )
           ],
